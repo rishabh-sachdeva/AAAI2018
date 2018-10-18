@@ -469,8 +469,8 @@ def findTrainTestFeatures(insts,tkns,tests):
     Returns:  all train test features, values, type of testing
   """""""""""""""""""""""""""""""""""""""""    	
   tokenDict = tkns.to_dict()
-#  for token in np.sort(tokenDict.keys()):
-  for token in ['arch']:
+  for token in np.sort(tokenDict.keys()):
+#  for token in ['arch']:
      objTkn = tokenDict[token][0]
      for kind in kinds:
 #     for kind in ['rgb']: 
