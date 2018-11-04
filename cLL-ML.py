@@ -25,9 +25,11 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--resDir',help='path to result directory',required=True)
 parser.add_argument('--cat', help='type for learning', choices=['all','rgb','shape','object'],required=True)
+parser.add_argument('--pre', help='the file with the preprocessed data', required=True)
 args = parser.parse_args()
 
 resultDir = args.resDir
+preFile = args.pre
 kinds = np.array([args.cat])
 if args.cat == 'all':
 	kinds = np.array(['rgb','shape','object'])
@@ -561,7 +563,7 @@ def execution(resultDir,ds,cDf,nDf,tests):
 if __name__== "__main__":
   print "START :: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
   anFile =  execPath + "groundtruth_annotation.conf"
-  anFile =  execPath + "6k_lemmatized_72instances_mechanicalturk_description.conf"
+  anFile =  execPath + preFile
   negFile = execPath + "NegInstancesWithDegrees.txt"
   fResName = ""
   os.system("mkdir -p " + resultDir)
