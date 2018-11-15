@@ -3,6 +3,7 @@
 #
 # Positive instances --> images of instances of which the visual classifier token is used at least 6 times to describe.
 # Negative instances -- > the intersection of negative sampling and Doc2Vec negative instances of all positive instances
+#
 
 # Arguments: If your result directory is 'test/NoOfDataPoints/6000', then
 # python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'rgb' 'rgb'
@@ -46,12 +47,22 @@ cID = ""
 if len(argvs) > 3:
    cID = str(argvs[3])
 
+prepped_file = "../6k_lemmatized_72instances_mechanicalturk_description.conf"
+if len(argvs) > 4:
+   prepped_file = str(argvs[4])
+
+language = "english"
+if len(argvs) > 5:
+   language = str(argvs[5])
 #tID = "rgb"
 #tID = "shape"
 #tID = "object"
+#files to store the positive and negative instances found by the evaluation? (do not exist before evaluation is called)
 posName = "posInstances.conf"
 negName = "negInstances.conf"
 
+
+#more files made over the process of evaluation
 pos = fld + "/evalHelpFiles/" + tID + "posInstances.conf"
 neg = fld + "/evalHelpFiles/" + tID + "negInstances.conf"
 
@@ -71,8 +82,19 @@ neg = fld + "/evalHelpFiles/" + tID + "negInstances.conf"
 #objWords = list(set(objWords) - set(['plantain', 'prism', 'brinjal']))
 
 ####TFIDF MeaningfulWords - Above 50.0####
-meaningfulWords = ['cylinder', 'apple', 'yellow', 'carrot', 'lime', 'blue', 'lemon', 'purple', 'orange', 'banana', 'red', 'cube', 'triangle', 'corn', 'triangular', 'cucumber', 'half', 'cabbage', 'ear', 'tomato', 'potato', 'rectangular', 'cob', 'green', 'eggplant']
-rgbWords  = ['yellow','blue','purple', 'orange','red','green']
+
+if language == "english":
+    rgbWords = ['yellow','blue','purple','black','isyellow','green','brown','orange','white','red']
+else:
+    rgbWords = ['amarillo','azul','púrpura','negro', 'isyellow','verde','marron','naranja','blanco','rojo' ]
+
+if language == "english":
+	meaningfulWords = ['cylinder', 'apple', 'yellow', 'carrot', 'lime', 'blue', 'lemon', 'purple', 'orange', 'banana', 'red', 'cube', 'triangle', 'corn', 'triangular', 'cucumber', 'half', 'cabbage', 'ear', 'tomato', 'potato', 'rectangular', 'cob', 'green', 'eggplant']
+else:
+	meaningfulWords = rgbWords
+
+
+
 shapeWords  = ['cylinder','cube', 'triangle','triangular','rectangular']
 objWords = ['cylinder', 'apple','carrot', 'lime','lemon','orange', 'banana','cube', 'triangle', 'corn','cucumber', 'half', 'cabbage', 'ear', 'tomato', 'potato', 'cob','eggplant']
 
@@ -159,7 +181,7 @@ def getTestInstancesAndClassifiers(fName):
 
 def writePosNeg():
  testObjs = objInstances.keys()
- descObjs = util.getDocsForTest(testObjs)
+ descObjs = util.getDocsForTest(testObjs, prepped_file)
 # descObjs = util.getDocuments()
  objTokens = util.sentenceToWordDicts(descObjs)
  tknsGlobal = set()
@@ -437,7 +459,8 @@ for fNo in fFldrs:
                   precT = np.mean(precTkn)
                   recT = np.mean(recTkn)
           dictRes = {'Classifier' : 'Total - ' + str(c),'Accuracy' : str(accT),'Precision' : str(precT) ,'Recall' : str(recT),'F1-Score' : str(f1T)}
-          writer.writerow(dictRes)
+          print str(c),'Accuracy:', str(accT),'Precision:' , str(precT) ,'Recall:' , str(recT),'F1-Score:' , str(f1T)
+	  writer.writerow(dictRes)
           accFldr.append(accT)
           f1sFldr.append(f1T)
           precFldr.append(precT)

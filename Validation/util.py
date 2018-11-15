@@ -45,8 +45,8 @@ def objectNames() :
       fullAnnotations[l[0]] = l3
   return fullAnnotations
 
-def getDocuments():
-   fName = "../6k_lemmatized_72instances_mechanicalturk_description.conf"
+def getDocuments(fName):
+   #fname is the name of the raw preprocessed file
    instSentences = {}
    with open(fName, 'r') as f:
     for line in f:
@@ -73,8 +73,7 @@ def getDocuments():
 #   print sortedinstSentences.keys()
    return sortedinstSentences
 
-def getDocsForTest(arTokens):
-  fName = "../6k_lemmatized_72instances_mechanicalturk_description.conf"
+def getDocsForTest(arTokens,fName):
   instSentences = {}
   with open(fName, 'r') as f:
    for line in f:
@@ -136,7 +135,7 @@ def findTopNtfidfterms(docLists,tfidfLists,N):
       dTFIDFMap = {}
       for j in range(len(dList)):
           dTFIDFMap[dList[j]] = tList[j]
-      
+
       stC = sorted(dTFIDFMap.items(), key=lambda x: x[1])
       lastpairs = stC[len(stC) - N  :]
       vals = []
@@ -159,7 +158,7 @@ class LabeledLineSentence(object):
         for index, arDoc in enumerate(self.docLists):
             self.sentences.append(LabeledSentence(arDoc, [self.docLabels[index]]))
         return self.sentences
-   
+
     def sentences_perm(self):
         shuffle(self.sentences)
         return self.sentences
