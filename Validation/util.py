@@ -74,6 +74,10 @@ def getDocuments(fName):
    return sortedinstSentences
 
 def getDocsForTest(arTokens,fName):
+  """
+  This function reads in the preprocessed file, and grabs the
+  lines that are related to the tokens that are being tested.
+  """
   instSentences = {}
   with open(fName, 'r') as f:
    for line in f:
@@ -102,6 +106,10 @@ def sentenceToWordLists(docs):
    return docLists
 
 def sentenceToWordDicts(docs):
+   """
+   This function just turns a dictionary of strings into a dictionary
+   where the strings are now a list of words.
+   """
    docDicts = {}
    for key in docs.keys():
       sent = docs[key]
@@ -172,11 +180,15 @@ def cosine_similarity(x,y):
    return round(numerator/float(denominator),3)
 
 def doc2Vec(docs):
+  """
+  Ths function takes in the instance:all descriptions dictionary.
+
+  """
   docLabels = []
   docNames = docs.keys()
   for key in docs.keys():
-   ar = key.split("/")
-   docLabels.append(key)
+    ar = key.split("/")
+    docLabels.append(key)
   docLists = sentenceToWordLists(docs)
   docDicts = sentenceToWordDicts(docs)
   sentences = LabeledLineSentence(docLists,docLabels)
@@ -190,6 +202,7 @@ def doc2Vec(docs):
     model.train(sentences.sentences_perm(),total_examples = token_count,epochs=model.iter)
   degreeMap = {}
   angles = []
+  #loop over all pairs of instance
   for i , item1 in enumerate(docLabels):
    fDoc = model.docvecs[docLabels[i]]
 
@@ -197,6 +210,7 @@ def doc2Vec(docs):
    cInstance = docLabels[i]
    for j,item2 in enumerate(docLabels):
      tDoc = model.docvecs[docLabels[j]]
+     #get the similarity between instances
      cosineVal = cosine_similarity(fDoc,tDoc)
      tInstance = docLabels[j]
      cValue = math.degrees(math.acos(cosineVal))
@@ -206,13 +220,19 @@ def doc2Vec(docs):
   maxAngle = max(angles)
   thresh5th = maxAngle
   thresh4th = maxAngle / 3
-#  thresh4th = 50.0
+  #  thresh4th = 50.0
   negMaps = {}
+  #this appears to return the similarity metric between an intance and every other instance
+  #in order with the most similar instances first
   for k,v in degreeMap.items() :
    negMaps[k] = []
    ss = sorted(v.items(), key=lambda x: x[1])
+   
+   #This choose the second two thirds of the list as the most different
    sPoint = int(len(ss)/3)
    ssNew = ss[sPoint:]
+   
    for itemSS in ssNew:
        negMaps[k].append(itemSS[0])
+  
   return negMaps
