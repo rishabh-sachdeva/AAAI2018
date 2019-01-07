@@ -6,11 +6,11 @@
 #
 
 # Arguments: If your result directory is 'test/NoOfDataPoints/6000', then
-# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'rgb' 'rgb'
+# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'rgb' 'rgb' <preprocessed file> <language>
 # or
-# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'shape' 'shape'
+# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'shape' 'shape' <preprocessed file> <language>
 # or
-# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'object' 'object'
+# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'object' 'object' <preprocessed file> <language>
 #!/usr/bin/env python
 import numpy as np
 from pandas import DataFrame, read_table
@@ -24,6 +24,10 @@ import csv
 import os
 import collections
 import os.path
+
+#this is a constant of the number of times a token needs to appear in instance descriptions before the instance
+#is counted as a positive example of that token
+MIN_INSTS = 1
 
 #These are global variables that will be used later
 posInsts = {}
@@ -57,6 +61,11 @@ language = "english"
 if len(argvs) > 5:
    language = str(argvs[5])
 
+if len(argvs) > 6 and "train" in argvs:
+   confFile = "groundTruthPredictionTrain.csv"
+else:
+   confFile = "groundTruthPrediction.csv"
+
 posName = "posInstances.conf"
 negName = "negInstances.conf"
 
@@ -88,7 +97,7 @@ elif tID == "object":
 
 #No tokens have appeared yet
 neverAppeared = tobeTestedTokens
-predfName = fld + "/groundTruthPrediction.csv"
+predfName = fld + "/"+confFile
 predfileName = fld
 
 def getPosNegInstances():
@@ -204,15 +213,14 @@ def writePosNeg():
 	    cValue = Counter(value)
 	    mostImpTokens[key] = []
 	    inst_token_count_dict[key] = {}
-
 	    for (k1,v1) in cValue.items():
 		     k1 = k1.replace("\r","").replace("\n","").replace("\t","")
 		     inst_token_count_dict[key][k1] = v1
 		     #If the token was used more than 10 times, it is important
 		     if v1 > 10:
 		        mostImpTokens[key].append(k1)
-		     if v1 > 5:
-		        #This is a spot where we only are looking at the
+		     if v1 >= MIN_INSTS:
+	                #This is a spot where we only are looking at the
 		        #words that have been identified as "meaningful"
 		        #if k1 in meaningfulWords:
 		        tknsGlobal.add(k1)
@@ -227,9 +235,7 @@ def writePosNeg():
 	 inst_token_count_frame = pd.DataFrame(inst_token_count_dict).fillna(0)
 
 	 inst_token_count_frame.to_csv(fld + "/token_instance_counts.csv")
-
 	 posTokens = collections.OrderedDict(sorted(posTokens.items()))
-	 
 	 #Output a file which maps tokens to the test instances that are positive examples of them
 	 os.system("mkdir -p " + fld + "/evalHelpFiles/")
 	 f = open(fld + "/evalHelpFiles/" + posName, "w")
@@ -440,7 +446,7 @@ for fNo in fFldrs:
     fld = resultFolder
 
     #fname is the ground truth prediction file that is made during training
-    fName = fName1 + "/groundTruthPrediction.csv"
+    fName = fName1 + "/" + confFile
     predfName = fName
 
     #These are the files that give positive and negative instances for each token. They will be populaed and
@@ -501,6 +507,7 @@ for fNo in fFldrs:
     #loop over the tokens that we do have examples for
     print "token,accuracy,precision,recall,f1,num_positive_instances,num_negative_instances"
     for c in testTokens:
+	  #print "number of testTokens: ",len(testTokens)
   	  dictRes = {'Classifier' : " "}
   	  writer.writerow(dictRes)
           testPosInsts = []
@@ -509,11 +516,13 @@ for fNo in fFldrs:
           f1T = 0.0
           precT = 0.0
           recT = 0.0
+	  #print "length of posInsts.keys: ",len(posInsts.keys())
 	  if c in posInsts.keys():
            	if len(posInsts[c]) > 0:
 	        	#objInstances has the set of test instances (as written in the ground truth test file)
 	        	#We only want to test over the intersection of the test instances and the positive instances
   	        	testPosInsts = list(set(posInsts[c]).intersection(set(objInstances.keys())))
+	  #print "length of negInsts.keys: ",len(negInsts.keys())
           if c in negInsts.keys():
            	if len(negInsts[c]) > 0:
               		testNegInsts = list(set(negInsts[c]).intersection(set(objInstances.keys())))
