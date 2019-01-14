@@ -6,11 +6,11 @@
 #
 
 # Arguments: If your result directory is 'test/NoOfDataPoints/6000', then
-# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'rgb' 'rgb' <preprocessed file> <language>
+# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'rgb' 'rgb'
 # or
-# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'shape' 'shape' <preprocessed file> <language>
+# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'shape' 'shape'
 # or
-# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'object' 'object' <preprocessed file> <language>
+# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'object' 'object'
 #!/usr/bin/env python
 import numpy as np
 from pandas import DataFrame, read_table
@@ -24,11 +24,12 @@ import csv
 import os
 import collections
 import os.path
+import math
 
 #this is a constant of the number of times a token needs to appear in instance descriptions before the instance
 #is counted as a positive example of that token
 MIN_INSTS = 1
-
+NEG_SAMPLE_PORTION = 0.25
 #These are global variables that will be used later
 posInsts = {}
 negInsts = {}
@@ -257,20 +258,35 @@ def writePosNeg():
 	       if kTkn not in value:
 	          negSampleTokens[kTkn].append(key)
 	 negTokens = {}
-
 	 #Now we get the doc2vec versions of the description strings for the instances
 	 #we just identified
 	 negsD = util.doc2Vec(descObjs)
+
 	 for kTkn in posTokens.keys():
 	   negTokens[kTkn] = negSampleTokens[kTkn]
 	   posV = posTokens[kTkn]
-
+           #This dictionary keeps track of how overal negative an instance is
+           sum_negative_dict = {}
 	   #Get the instances that are both far away with doc2vec and also dont have descriptions that use that token
 	   for v in posV:
+              #get the negative instances and their distances. Add it to the overal dict
+              #only consider instances that hace not seen the token in their descriptions
 	      negDocVec = negsD[v]
-	      negTokens[kTkn] = list(set(negTokens[kTkn]).intersection(set(negDocVec)))
-
-	 #write the negative tokens to the file
+              for (negInst,distance) in negDocVec:
+                 if negInst in negSampleTokens[kTkn]:
+                    if negInst in sum_negative_dict:
+                       sum_negative_dict[negInst] += distance
+                    else:
+                       sum_negative_dict[negInst] = distance
+                 
+	      #negTokens[kTkn] = list(set(negTokens[kTkn]).intersection(set(negDocVec)))
+              #negTokens[kTkn] = list(set(negSampleTokens[kTkn]).intersection(set(negDocVec)) | set(negTokens[kTkn]))
+           #take the top N negative examples by the weighted votes from all positive instances
+           sum_negs_sorted = sorted(sum_negative_dict.iteritems(),key = lambda x: x[1], reverse=True)
+           num_to_choose = int(math.ceil(float(len(sum_negs_sorted))*NEG_SAMPLE_PORTION))
+           negTokens[kTkn] = [negInst for negInst, negVal in sum_negs_sorted[:num_to_choose]]
+	
+         #write the negative tokens to the file
 	 negTokens = collections.OrderedDict(sorted(negTokens.items()))
 	 f = open(fld + "/evalHelpFiles/" + negName, "w")
 	 f.write(title)
@@ -526,7 +542,7 @@ for fNo in fFldrs:
           if c in negInsts.keys():
            	if len(negInsts[c]) > 0:
               		testNegInsts = list(set(negInsts[c]).intersection(set(objInstances.keys())))
-
+	 
 	  #After subsetting by the test instances, see if we still have any to test
           if len(testPosInsts) > 0 or len(testNegInsts) > 0:
                   accTkn = []
@@ -580,6 +596,7 @@ for fNo in fFldrs:
                   f1T = np.mean(f1sTkn)
                   precT = np.mean(precTkn)
                   recT = np.mean(recTkn)
+		  
 		  print str(c)+","+str(accT)+","+str(precT)+","+str(recT)+","+str(f1T)+","+str(len(testPosInsts))+","+str(len(testNegInsts))
 	  #write the results to the overal file
           dictRes = {'Classifier' : 'Total - ' + str(c),'Accuracy' : str(accT),'Precision' : str(precT) ,'Recall' : str(recT),'F1-Score' : str(f1T)}

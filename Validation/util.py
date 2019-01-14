@@ -224,15 +224,18 @@ def doc2Vec(docs):
   negMaps = {}
   #this appears to return the similarity metric between an intance and every other instance
   #in order with the most similar instances first
+  
   for k,v in degreeMap.items() :
+   #print "#######################"
+   #print k,":",v
    negMaps[k] = []
    ss = sorted(v.items(), key=lambda x: x[1])
    
    #This choose the second two thirds of the list as the most different
    sPoint = int(len(ss)/3)
    ssNew = ss[sPoint:]
+   negMaps[k] = ssNew 
+   #for itemSS in ssNew:
+   #    negMaps[k].append(itemSS[0])
    
-   for itemSS in ssNew:
-       negMaps[k].append(itemSS[0])
-  
   return negMaps

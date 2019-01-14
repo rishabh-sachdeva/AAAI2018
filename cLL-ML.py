@@ -29,7 +29,8 @@ from scipy import spatial
 #This is the variable that defines how many positive instances a token must have before it is deemed useful.
 #NOTE: this is different from how many times it appeared for a particular instance. For the training that appears to
 #be 1.
-MIN_POS_INSTS = 1
+MIN_POS_INSTS = 3
+NEG_SAMPLE_PORTION = 0.25
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--resDir',help='path to result directory',required=True)
@@ -537,26 +538,51 @@ class DataSet:
       fileAppend(fName,sent)
       negSelection = NegSampleSelection(docs)
       negExamples = negSelection.generateNegatives()
+
       """ find negative instances for all tokens.
       Instances which has cosine angle greater than 80 in vector space consider as negative sample"""
       for tk in tokenDf.keys():
          poss = list(set(tokenDf[tk].getPositives()))
          negs = []
+         #this keeps track of how strongly negative each instance is for this token
+         negCandidateScores = {}
+
          for ds in poss:
              if isinstance(negExamples[ds], str):
                   negatives1 = negExamples[ds].split(",")
-		  negatives = []
+                  localNegCandScores = {}
                   for instNeg in negatives1:
                        s1 = instNeg.split("-")
-                       """ if the cosine angle between 2 instances is greater that dgAbove (80 in this case),
-                       we consider them as negative instances to each other """
-                       if int(float(s1[1])) >= dgAbove:
-                             negatives.append(s1[0])
-                  negatives = [xx for xx in negatives if xx not in tests]
-#                  negatives = [xx for xx in negatives if xx not in poss]
-                  negs.extend(negatives)
-         negsPart = negs
+                       #filter out instances that see the token in their descriptions
+                       #also filter out instances that are in the test split
+                       if s1[0] in tests or tk in docs[s1[0]].split(" "):
+                            continue
+
+                       localNegCandScores[s1[0]] = float(s1[1])
+                  #sort the local dictionary by closeness and select the back 2/3 of that list
+                  scores_sorted = list(sorted(localNegCandScores.iteritems(), key= lambda x: x[1], reverse = False))
+                  scores_sorted = scores_sorted[len(scores_sorted)//3:]
+                  #now update the main dictionary
+   	          for (inst,val) in scores_sorted:
+                       if inst in negCandidateScores:
+		            negCandidateScores[inst] += val
+                       else:
+                            negCandidateScores[inst] = val
+
+
+         #out of the options left choose the N most negative
+         num_to_choose = int(math.ceil(float(len(negCandidateScores.keys()))*NEG_SAMPLE_PORTION))
+         choices_sorted = list(sorted(negCandidateScores.iteritems(), key= lambda x: x[1], reverse = True))
+         choices = [negInst for negInst,negVal in choices_sorted[:num_to_choose]]
+
+
+         print "For token",tk,"with",len(poss),"positive examples","choosing",num_to_choose,"examples","out of",len(negCandidateScores.keys())
+
+         #print "Original negatives:",negs
+         #print "New negatives:", choices
+         negsPart = choices
          tokenDf[tk].extendNegatives(negsPart)
+
       return tks
 
 
