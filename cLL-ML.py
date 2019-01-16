@@ -17,7 +17,7 @@ from sklearn.metrics import (brier_score_loss, precision_score, recall_score,f1_
 from sklearn import linear_model
 from sklearn import metrics
 from sklearn.metrics import precision_recall_fscore_support
-import csv
+import csv 
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 import sklearn
@@ -30,19 +30,22 @@ from scipy import spatial
 #NOTE: this is different from how many times it appeared for a particular instance. For the training that appears to
 #be 1.
 MIN_POS_INSTS = 3
-NEG_SAMPLE_PORTION = 0.25
+#NEG_SAMPLE_PORTION = 0.25
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--resDir',help='path to result directory',required=True)
 parser.add_argument('--cat', help='type for learning', choices=['all','rgb','shape','object'],required=True)
 parser.add_argument('--pre', help='the file with the preprocessed data', required=True)
 parser.add_argument('--lan', choices=['english','spanish'],help='the language you are using', required=True)
+parser.add_argument('--cutoff',choices=['0.25','0.5','0.75'],help='the cutoff for what portion of negative examples to use', default='0.25')
+
 args = parser.parse_args()
 
 resultDir = args.resDir
 preFile = args.pre
 language = args.lan
 kinds = np.array([args.cat])
+NEG_SAMPLE_PORTION = float(args.cutoff)
 if args.cat == 'all':
 	kinds = np.array(['rgb','shape','object'])
 execType = 'random'
@@ -56,7 +59,7 @@ dgAbove = 80
 
 ds = ""
 cDf = ""
-nDf = ""
+nDf = "" 
 tests = ""
 
 if language == "spanish":
@@ -73,8 +76,8 @@ generalShapes = ['spherical', 'cylinder', 'square', 'rounded', 'cylindershaped',
 def fileAppend(fName, sentence):
   """""""""""""""""""""""""""""""""""""""""
 	Function to write results/outputs to a log file
-	 	Args: file descriptor, sentence to write
-	 	Returns: Nothing
+		Args: file descriptor, sentence to write
+		Returns: Nothing
   """""""""""""""""""""""""""""""""""""""""
   with open(fName, "a") as myfile:
     myfile.write(sentence)
@@ -95,7 +98,7 @@ class LabeledLineSentence(object):
         for index, arDoc in enumerate(self.docLists):
             self.sentences.append(LabeledSentence(arDoc, [self.docLabels[index]]))
         return self.sentences
-
+    
     def sentences_perm(self):
         from random import shuffle
         shuffle(self.sentences)
@@ -108,7 +111,7 @@ class NegSampleSelection:
    def __init__(self,docs):
       """""""""""""""""""""""""""""""""""""""""
                 Initialization function for NegSampleSelection class
-                Args: Documents dictionary where key is object instance and value
+                Args: Documents dictionary where key is object instance and value 
                       is object annotation
                 Returns: Nothing
       """""""""""""""""""""""""""""""""""""""""
@@ -132,10 +135,10 @@ class NegSampleSelection:
          wLists = sent.split(" ")
          docDicts[key] = wLists
       return docDicts
-
+   
    def square_rooted(self,x):
       return round(math.sqrt(sum([a*a for a in x])),3)
-
+ 
    def cosine_similarity(self,x,y):
       numerator = sum(a*b for a,b in zip(x,y))
       denominator = self.square_rooted(x)*self.square_rooted(y)
@@ -173,7 +176,7 @@ class NegSampleSelection:
             tInstance = docNames[j]
             cInstMap[tInstance] = cValue
          degreeMap[cInstance] = cInstMap
-      negInstances = {}
+      negInstances = {}     
       for k in np.sort(degreeMap.keys()):
         v = degreeMap[k]
         ss = sorted(v.items(), key=lambda x: x[1])
@@ -189,31 +192,31 @@ class NegSampleSelection:
 
 class Category:
    """ Class to bundle our dataset functions and variables category wise. """
-   __slots__ = ['catNums', 'name']
+   __slots__ = ['catNums', 'name']  
    catNums = np.array([], dtype='object')
-
+  
    def __init__(self, name):
       """""""""""""""""""""""""""""""""""""""""
 		Initialization function for category class
-     		Args: category name
-     		Returns: Nothing
-      """""""""""""""""""""""""""""""""""""""""
+		Args: category name
+		Returns: Nothing
+      """""""""""""""""""""""""""""""""""""""""		
       self.name = name
-
+      
    def getName(self):
       """""""""""""""""""""""""""""""""""""""""
-      	Function to get the category name
-     		Args: category class instance
-     		Returns: category name
-      """""""""""""""""""""""""""""""""""""""""
+	Function to get the category name
+		Args: category class instance
+		Returns: category name
+      """""""""""""""""""""""""""""""""""""""""		   
       return self.name
-
+     
    def addCategoryInstances(self,*num):
       """""""""""""""""""""""""""""""""""""""""
       Function to add a new instance number to the category
          Args: category class instance
          Returns: None
-      """""""""""""""""""""""""""""""""""""""""
+      """""""""""""""""""""""""""""""""""""""""		   
       self.catNums = np.unique(np.append(self.catNums,num))
 
 
@@ -222,8 +225,8 @@ class Category:
       Function to select one random instance from this category for testing
          Args: category class instance
          Returns: Randomly selected instance name
-      """""""""""""""""""""""""""""""""""""""""
-      r = random.randint(0,self.catNums.size - 1)
+      """""""""""""""""""""""""""""""""""""""""		   
+      r = random.randint(0,self.catNums.size - 1)  
       instName = self.name + "/" + self.name + "_" + self.catNums[r]
       return instName
 
@@ -239,54 +242,54 @@ class Instance(Category):
 		Initialization function for Instance class
          Args: instance name, category number of this instance
          Returns: Nothing
-        """""""""""""""""""""""""""""""""""""""""
+        """""""""""""""""""""""""""""""""""""""""	
 		self.name = name
 		self.catNum = num
 
 	def getName(self):
 		"""""""""""""""""""""""""""""""""""""""""
 
-    	Function to get the instance name
-     		Args: Instance class instance
-     		Returns: instance name
-     	"""""""""""""""""""""""""""""""""""""""""
-		return self.name
-
-
-
+	Function to get the instance name
+		Args: Instance class instance
+		Returns: instance name
+	"""""""""""""""""""""""""""""""""""""""""
+		return self.name	
+        
+	
+        
 	def getFeatures(self,kind):
 		"""""""""""""""""""""""""""""""""""""""""
-		Function to find the complete dataset file path (.../arch/arch_1/arch_1_rgb.log)
+		Function to find the complete dataset file path (.../arch/arch_1/arch_1_rgb.log) 
 		where the visual feaures are stored, read the features from the file, and return
-
-         	Args: Instance class instance, type of features(rgb, shape, or object)
-         	Returns: feature set
-        """""""""""""""""""""""""""""""""""""""""
+	
+		Args: Instance class instance, type of features(rgb, shape, or object)
+		Returns: feature set
+        """""""""""""""""""""""""""""""""""""""""	
 		instName = self.name
 		instName.strip()
 		ar1 = instName.split("/")
 		path1 = "/".join([dsPath,instName])
 		path  = path1 + "/" + ar1[1] + "_" + kind + ".log"
 		featureSet = read_table(path,sep=',',  header=None)
-		return featureSet.values
-
+		return featureSet.values        
+        
 	def addNegatives(self, negs):
 		"""""""""""""""""""""""""""""""""""""""""
 		Function to add negative instances
-
-         	Args: Instance class instance, array of negative instances
-         	Returns: None
-        """""""""""""""""""""""""""""""""""""""""
+	
+		Args: Instance class instance, array of negative instances 
+		Returns: None
+        """""""""""""""""""""""""""""""""""""""""	
 		add = lambda x : np.unique(map(str.strip,x))
 		self.negs = add(negs)
 
 	def getNegatives(self):
 		"""""""""""""""""""""""""""""""""""""""""
 		Function to get the list of negative instances
-
-         	Args: Instance class instance
-         	Returns: array of negative instances
-        """""""""""""""""""""""""""""""""""""""""
+	
+		Args: Instance class instance 
+		Returns: array of negative instances
+        """""""""""""""""""""""""""""""""""""""""	
 		return self.negs
 
 	def addTokens(self,tkn):
@@ -294,7 +297,7 @@ class Instance(Category):
 		Function to add a word (token) describing this instance to the array of tokens
          Args: Instance class instance, word
          Returns: None
-        """""""""""""""""""""""""""""""""""""""""
+        """""""""""""""""""""""""""""""""""""""""		
 		self.tokens = np.append(self.tokens,tkn)
 
 	def getTokens(self):
@@ -302,15 +305,15 @@ class Instance(Category):
 		Function to get array of tokens which humans used to describe this instance
          Args: Instance class instance
          Returns: array of words (tokens)
-        """""""""""""""""""""""""""""""""""""""""
+        """""""""""""""""""""""""""""""""""""""""		
 		return self.tokens
-
-	def getY(self,token,kind):
+  
+	def getY(self,token,kind):		
 		"""""""""""""""""""""""""""""""""""""""""
         Function to find if a token is a meaningful representation for this instance for testing. In other words, if the token is described for this instance in learning phase, we consider it as a meaningful label.
          Args: Instance class instance, word (token) to verify, type of testing
          Returns: 1 (the token is a meaningful label) / 0 (the token is not a  meaningful label)
-		"""""""""""""""""""""""""""""""""""""""""
+		"""""""""""""""""""""""""""""""""""""""""		
 		if token in list(self.tokens):
 			if kind == "rgb":
 				if token in list(generalColors):
@@ -324,7 +327,7 @@ class Instance(Category):
 		return 0
 
 class Token:
-
+	
    """ Class to bundle token (word) related functions and variables """
    __slots__ = ['name', 'posInstances', 'negInstances']
    posInstances = np.array([], dtype='object')
@@ -335,51 +338,51 @@ class Token:
 		Initialization function for Token class
          Args: token name ("red")
          Returns: Nothing
-        """""""""""""""""""""""""""""""""""""""""
+        """""""""""""""""""""""""""""""""""""""""	   
         self.name = name
-
+   
    def getTokenName(self):
        """""""""""""""""""""""""""""""""""""""""
-    	Function to get the label from class instance
-     		Args: Token class instance
-     		Returns: token (label, for ex: "red")
-       """""""""""""""""""""""""""""""""""""""""
+	Function to get the label from class instance
+		Args: Token class instance
+		Returns: token (label, for ex: "red")
+       """""""""""""""""""""""""""""""""""""""""	   
        return self.name
 
    def extendPositives(self,instName):
       """""""""""""""""""""""""""""""""""""""""
 		Function to add postive instance (tomato/tomato_1) for this token (red)
-
-         	Args: token class instance, positive instance
-         	Returns: None
-      """""""""""""""""""""""""""""""""""""""""
+	
+		Args: token class instance, positive instance
+		Returns: None
+      """""""""""""""""""""""""""""""""""""""""		   
       self.posInstances = np.append(self.posInstances,instName)
-
+   
    def getPositives(self):
       """""""""""""""""""""""""""""""""""""""""
-		Function to get all postive instances of this token
-
-         	Args: token class instance
-         	Returns: array of positive instances (ex: tomato/tomato_1, ..)
-      """""""""""""""""""""""""""""""""""""""""
+		Function to get all postive instances of this token 
+	
+		Args: token class instance
+		Returns: array of positive instances (ex: tomato/tomato_1, ..)
+      """""""""""""""""""""""""""""""""""""""""		   
       return self.posInstances
 
    def extendNegatives(self,*instName):
       """""""""""""""""""""""""""""""""""""""""
 		Function to add negative instances for this token
-
-         	Args: Instance class instance, array of negative instances
-         	Returns: None
-      """""""""""""""""""""""""""""""""""""""""
+	
+		Args: Instance class instance, array of negative instances 
+		Returns: None
+      """""""""""""""""""""""""""""""""""""""""		   
       self.negInstances = np.unique(np.append(self.negInstances,instName))
 
    def getNegatives(self):
       """""""""""""""""""""""""""""""""""""""""
 		Function to get all negative instances of this token (ex, "red")
-
-         	Args: token class instance
-         	Returns: array of negative instances (ex: arch/arch_1, ..)
-      """""""""""""""""""""""""""""""""""""""""
+	
+		Args: token class instance
+		Returns: array of negative instances (ex: arch/arch_1, ..)
+      """""""""""""""""""""""""""""""""""""""""		
       return self.negInstances
 
    def clearNegatives(self):
@@ -389,46 +392,46 @@ class Token:
    def getTrainFiles(self,insts,kind):
       """""""""""""""""""""""""""""""""""""""""
         This function is to get all training features for this particular token
-    		>> Find positive instances described for this token
-    		>> if the token is used less than 3 times, remove it from execution
-    		>> fetch the feature values from the physical dataset location
-    		>> find negative instances and fetch the feature values from the physical location
-    		>> balance the number positive and negative feature samples
-
+		>> Find positive instances described for this token
+		>> if the token is used less than 3 times, remove it from execution
+		>> fetch the feature values from the physical dataset location
+		>> find negative instances and fetch the feature values from the physical location
+		>> balance the number positive and negative feature samples
+		
              Args: token class instance, complete Instance list, type for learning/testing
              Returns: training features (X) and values (Y)
-      """""""""""""""""""""""""""""""""""""""""
+      """""""""""""""""""""""""""""""""""""""""		   
       instances = insts.to_dict()
       pS = Counter(self.posInstances)
       #NOTE: this is not how many times a token was used at all, but how many positive instances it has
       #This means a token count be used 100 times for a particular instance but still not make the cut.
       if len(self.posInstances) < MIN_POS_INSTS:
-      	  return np.array([]),np.array([])
+	  return np.array([]),np.array([])
       features = np.array([])
       negFeatures = np.array([])
       y = np.array([])
       if self.posInstances.shape[0] == 0 or self.negInstances.shape[0] == 0 :
          return (features,y)
-
+      
       if self.posInstances.shape[0] > 0 :
         features = np.vstack(instances[inst][0].getFeatures(kind) for inst in self.posInstances)
-
+     
       if self.negInstances.shape[0] > 0:
         negFeatures = np.vstack(instances[inst][0].getFeatures(kind) for inst in self.negInstances if len(inst) > 1)
-        """ if length of positive samples are more than the length of negative samples,
+        """ if length of positive samples are more than the length of negative samples, 
         duplicate negative instances to balance the count"""
         if len(features) > len(negFeatures):
           c = int(len(features) / len(negFeatures))
           negFeatures = np.tile(negFeatures,(c,1))
 
       if self.posInstances.shape[0] > 0 and self.negInstances.shape[0] > 0 :
-       """ if length of positive samples are less than the length of negative samples,
-        duplicate positive samples to balance the count"""
+       """ if length of positive samples are less than the length of negative samples, 
+        duplicate positive samples to balance the count"""		  
        if len(negFeatures) > len(features):
           c = int(len(negFeatures) / len(features))
           features = np.tile(features,(c,1))
-      """ find trainY for our binary classifier: 1 for positive samples,
-      0 for negative samples"""
+      """ find trainY for our binary classifier: 1 for positive samples, 
+      0 for negative samples"""          
       y = np.concatenate((np.full(len(features),1),np.full(len(negFeatures),0)))
       if self.negInstances.shape[0] > 0:
         features = np.vstack([features,negFeatures])
@@ -436,30 +439,30 @@ class Token:
 
 
 class DataSet:
-   """ Class to bundle data set related functions and variables """
+   """ Class to bundle data set related functions and variables """	  
    __slots__ = ['dsPath', 'annotationFile']
-
+   
    def __init__(self, path,anFile):
       """""""""""""""""""""""""""""""""""""""""
 		Initialization function for Dataset class
-         Args:
-         	path - physical location of image dataset
-         	anFile - 6k amazon mechanical turk description file
+         Args: 
+		path - physical location of image dataset
+		anFile - 6k amazon mechanical turk description file
          Returns: Nothing
-      """""""""""""""""""""""""""""""""""""""""
+      """""""""""""""""""""""""""""""""""""""""		   
       self.dsPath = path
       self.annotationFile = anFile
 
    def findCategoryInstances(self):
       """""""""""""""""""""""""""""""""""""""""
         Function to find all categories and instances in the dataset
-        	>> Read the amazon mechanical turk annotation file,
-        	>> Find all categories (ex, tomato), and instances (ex, tomato_1, tomato_2..)
-        	>> Create Category class instances and Instance class instances
+		>> Read the amazon mechanical turk annotation file,
+		>> Find all categories (ex, tomato), and instances (ex, tomato_1, tomato_2..)
+		>> Create Category class instances and Instance class instances 
 
              Args:  dataset instance
              Returns:  Category class instances, Instance class instances
-      """""""""""""""""""""""""""""""""""""""""
+      """""""""""""""""""""""""""""""""""""""""		   
       nDf = read_table(self.annotationFile,sep=',',  header=None)
       nDs = nDf.values
       categories = {}
@@ -481,12 +484,12 @@ class DataSet:
    def splitTestInstances(self,cDf):
       """""""""""""""""""""""""""""""""""""""""
         Function to find one instance from all categories for testing
-        	>> We use 4-fold cross validation here
-        	>> We try to find a random instance from all categories for testing
+		>> We use 4-fold cross validation here
+		>> We try to find a random instance from all categories for testing
 
              Args:  dataset instance, all Category class instances
              Returns:  array of randomly selected instances for testing
-      """""""""""""""""""""""""""""""""""""""""
+      """""""""""""""""""""""""""""""""""""""""		   
       cats = cDf.to_dict()
       tests = np.array([])
       for cat in np.sort(cats.keys()):
@@ -497,21 +500,21 @@ class DataSet:
 
    def getDataSet(self,cDf,nDf,tests,fName):
       """""""""""""""""""""""""""""""""""""""""
-        Function to add amazon mechanical turk description file,
+        Function to add amazon mechanical turk description file, 
         find all tokens, find positive and negative instances for all tokens
 
-             Args:  dataset instance, array of Category class instances,
-             	array of Instance class instances, array of instance names to test,
-             	file name for logging
+             Args:  dataset instance, array of Category class instances, 
+		array of Instance class instances, array of instance names to test, 
+		file name for logging
              Returns:  array of Token class instances
-      """""""""""""""""""""""""""""""""""""""""
+      """""""""""""""""""""""""""""""""""""""""		   
       instances = nDf.to_dict()
-      """ read the amazon mechanical turk description file line by line,
+      """ read the amazon mechanical turk description file line by line, 
       separating by comma [ line example, 'arch/arch_1, yellow arch' """
-      df = read_table(self.annotationFile, sep=',',  header=None)
+      df = read_table(self.annotationFile, sep=',',  header=None)  
       tokenDf = {}
       cDz = df.values
-      """ column[0] would be arch/arch_1 and column[1] would be 'yellow arch' """
+      """ column[0] would be arch/arch_1 and column[1] would be 'yellow arch' """ 
       docs = {}
       for column in df.values:
         ds = column[0]
@@ -522,7 +525,7 @@ class DataSet:
         else:
            docs[ds] = column[1]
         dsTokens = column[1].split(" ")
-        dsTokens = list(filter(None, dsTokens))
+        dsTokens = list(filter(None, dsTokens)) 
         """ add 'yellow' and 'arch' as the tokens of 'arch/arch_1' """
         instances[ds][0].addTokens(dsTokens)
         if ds not in tests:
@@ -531,8 +534,8 @@ class DataSet:
              if annotation not in tokenDf.keys():
                  """ creating Token class instances for all tokens (ex, 'yellow' and 'arch') """
                  tokenDf[annotation] = Token(annotation)
-             """ add 'arch/arch_1' as a positive instance for token 'yellow' """
-             tokenDf[annotation].extendPositives(ds)
+             """ add 'arch/arch_1' as a positive instance for token 'yellow' """    
+             tokenDf[annotation].extendPositives(ds) 
       tks = pd.DataFrame(tokenDf,index=[0])
       sent = "Tokens :: "+ " ".join(tokenDf.keys())
       fileAppend(fName,sent)
@@ -557,15 +560,15 @@ class DataSet:
                        #also filter out instances that are in the test split
                        if s1[0] in tests or tk in docs[s1[0]].split(" "):
                             continue
-
+                      
                        localNegCandScores[s1[0]] = float(s1[1])
                   #sort the local dictionary by closeness and select the back 2/3 of that list
                   scores_sorted = list(sorted(localNegCandScores.iteritems(), key= lambda x: x[1], reverse = False))
                   scores_sorted = scores_sorted[len(scores_sorted)//3:]
                   #now update the main dictionary
-   	          for (inst,val) in scores_sorted:
+		  for (inst,val) in scores_sorted:
                        if inst in negCandidateScores:
-		            negCandidateScores[inst] += val
+			    negCandidateScores[inst] += val
                        else:
                             negCandidateScores[inst] = val
 
@@ -575,25 +578,25 @@ class DataSet:
          choices_sorted = list(sorted(negCandidateScores.iteritems(), key= lambda x: x[1], reverse = True))
          choices = [negInst for negInst,negVal in choices_sorted[:num_to_choose]]
 
-
+         
          print "For token",tk,"with",len(poss),"positive examples","choosing",num_to_choose,"examples","out of",len(negCandidateScores.keys())
-
+         
          #print "Original negatives:",negs
          #print "New negatives:", choices
          negsPart = choices
          tokenDf[tk].extendNegatives(negsPart)
+            
+      return tks   
 
-      return tks
-
-
+              
 def getTestFiles(insts,kind,tests,token):
    """""""""""""""""""""""""""""""""""""""""
    Function to get all feature sets for testing and dummy 'Y' values
-   		Args:  Array of all Instance class instances, type of testing
-   				(rgb, shape, or object) , array of test instance names,
-   				token (word) that is testing
+		Args:  Array of all Instance class instances, type of testing  
+				(rgb, shape, or object) , array of test instance names, 
+				token (word) that is testing
         Returns:  Feature set and values for testing
-   """""""""""""""""""""""""""""""""""""""""
+   """""""""""""""""""""""""""""""""""""""""		
    instances = insts.to_dict()
    features = []
    y = []
@@ -609,8 +612,8 @@ def getNonTestFiles(insts,kind,tests,token):
    Function to get all feature sets for training data. This is used for
    testing on the training data (as a preliminary step to filter out tokens
    that are not meaningful like 'the')
-                Args:  Array of all Instance class instances, type of testing
-                                (rgb, shape, or object) , array of test instance names,
+                Args:  Array of all Instance class instances, type of testing  
+                                (rgb, shape, or object) , array of test instance names, 
                                 token (word) that is testing
         Returns:  Feature set
    """""""""""""""""""""""""""""""""""""""""
@@ -619,26 +622,26 @@ def getNonTestFiles(insts,kind,tests,token):
    trainNames = []
    for nInst in instances.keys():
       if nInst not in tests:
-      	fs  = instances[nInst][0].getFeatures(kind)
+	fs  = instances[nInst][0].getFeatures(kind)
         trainNames.append(nInst)
-      	features.append(list(fs))
-
+	features.append(list(fs))
+      
    return(features, trainNames)
 
 def findTrainTestFeatures(insts,tkns,tests):
   """""""""""""""""""""""""""""""""""""""""
   Function to iterate over all tokens, find train and test features for execution
-  	Args:  Array of all Instance class instances,
-  		array of all Token class instances,
-  		array of test instance names
+	Args:  Array of all Instance class instances, 
+		array of all Token class instances, 
+		array of test instance names
     Returns:  all train test features, values, type of testing
-  """""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""	
   tokenDict = tkns.to_dict()
   for token in np.sort(tokenDict.keys()):
 #  for token in ['arch']:
      objTkn = tokenDict[token][0]
      for kind in kinds:
-#     for kind in ['rgb']:
+#     for kind in ['rgb']: 
         (features,y) = objTkn.getTrainFiles(insts,kind)
         (testFeatures,testY) = getTestFiles(insts,kind,tests,token)
         (trainForTestingFeatures, trainNames) = getNonTestFiles(insts,kind,tests,token)
@@ -648,8 +651,8 @@ def findTrainTestFeatures(insts,tkns,tests):
 
 
 def callML(resultDir,insts,tkns,tests,algType,resfname):
-  """ generate a CSV result file with all probabilities
-	for the association between tokens (words) and test instances"""
+  """ generate a CSV result file with all probabilities 
+	for the association between tokens (words) and test instances"""	
   confFile = open(resultDir + '/groundTruthPrediction.csv','w')
   headFlag = 0
   fldNames = np.array(['Token','Type'])
@@ -660,14 +663,14 @@ def callML(resultDir,insts,tkns,tests,algType,resfname):
   trainConfFile = open(resultDir + '/groundTruthPredictionTrain.csv','w')
   trainHeadFlag = 0
   trainFldNames = set()
-
+  
   """ Trying to add correct object name of test instances in groundTruthPrediction csv file
-  	ex, 'tomato/tomato_1 - red tomato' """
+	ex, 'tomato/tomato_1 - red tomato' """
   featureSet = read_table(fAnnotation,sep=',',  header=None)
   featureSet = featureSet.values
   fSet = dict(zip(featureSet[:,0],featureSet[:,1]))
   testTokens = []
-
+  
   """ fine tokens, type to test, train/test features and values """
   for (token,kind,X,Y,tX,tY,trX, trNames) in findTrainTestFeatures(insts,tkns,tests):
    if token not in testTokens:
@@ -681,27 +684,27 @@ def callML(resultDir,insts,tkns,tests,algType,resfname):
    pipeline2_2 = Pipeline([("logistic", sgdK)])
 
    pipeline2_2.fit(X,Y)
-   fldNames = np.array(['Token','Type'])
+   fldNames = np.array(['Token','Type'])  
    confD = {}
    confDict = {'Token' : token,'Type' : kind}
-   """ testing all images category wise and saving the probabilitties in a Map
-   		for ex, for category, tomato, test all images (tomato image 1, tomato image 2...)"""
+   """ testing all images category wise and saving the probabilitties in a Map 
+		for ex, for category, tomato, test all images (tomato image 1, tomato image 2...)"""
    for ii in range(len(tX)) :
       testX = tX[ii]
-
+      
       testY = tY[ii]
       tt = tests[ii]
-
-      predY = []
+      
+      predY = []  
       tProbs = []
       probK = pipeline2_2.predict_proba(testX)
       tProbs = probK[:,1]
       predY = tProbs
-
+       
       for ik in range(len(tProbs)):
           fldNames = np.append(fldNames,str(ik) + "-" + tt)
           confD[str(ik) + "-" + tt] = str(fSet[tt])
-
+	 
       for ik in range(len(tProbs)):
           confDict[str(ik) + "-" + tt] = str(tProbs[ik])
 
@@ -710,7 +713,7 @@ def callML(resultDir,insts,tkns,tests,algType,resfname):
       """ saving the header of CSV file """
       confWriter = csv.DictWriter(confFile, fieldnames=fldNames)
       confWriter.writeheader()
-
+      
       confWriter.writerow(confD)
    """ saving probabilities in CSV file """
    confWriter.writerow(confDict)
@@ -718,12 +721,12 @@ def callML(resultDir,insts,tkns,tests,algType,resfname):
    #now generate the probability of each training data being an example of this token and kind
    trainProbDict = {"Token":token,"Type":kind}
    trainConfD = {}
-
+   
    for trI in range(len(trX)):
       trainIX = trX[trI]
       trName = trNames[trI]
       #print trName, trainIX
-
+      
       probK = pipeline2_2.predict_proba(trainIX)
       tProbs = probK[:,1]
 
@@ -733,7 +736,7 @@ def callML(resultDir,insts,tkns,tests,algType,resfname):
 
       for ik in range(len(tProbs)):
           trainProbDict[str(ik) + "-" + trName] = str(tProbs[ik])
-
+      
    #should be unable to even predict the training data
    if trainHeadFlag == 0:
       trainHeadFlag = 1
@@ -744,14 +747,16 @@ def callML(resultDir,insts,tkns,tests,algType,resfname):
 
       trainConfWriter.writerow(trainConfD)
    """ saving probabilities in CSV file """
-   trainConfWriter.writerow(trainProbDict)
-
+   trainConfWriter.writerow(trainProbDict)   
+          
 
   confFile.close()
   trainConfFile.close()
-
+  ####TODO: so the problem is that getTrain only grabs relevent training examples. I need all training examples. Thus I need to write a 
+  #new function that acts like the testing one in that it just gets all the features of the kind and excludes testing instances 
+  
 def execution(resultDir,ds,cDf,nDf,tests):
-
+	
     resultDir1 = resultDir + "/NoOfDataPoints/6000"
     os.system("mkdir -p " + resultDir1)
     fResName = resultDir1 + "/results.txt"
@@ -760,9 +765,9 @@ def execution(resultDir,ds,cDf,nDf,tests):
     """ read amazon mechanical turk file, find all tokens
     get positive and negative instance for all tokens """
     tokens = ds.getDataSet(cDf,nDf,tests,fResName)
-    """ Train and run binary classifiers for all tokens, find the probabilities
-    	for the associations between all tokens and test instances,
-    	and log the probabilitties """
+    """ Train and run binary classifiers for all tokens, find the probabilities 
+	for the associations between all tokens and test instances, 
+	and log the probabilitties """
     callML(resultDir1,nDf,tokens,tests,0,fResName)
 
 
