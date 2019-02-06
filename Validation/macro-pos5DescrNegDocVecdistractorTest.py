@@ -28,7 +28,7 @@ import math
 
 #this is a constant of the number of times a token needs to appear in instance descriptions before the instance
 #is counted as a positive example of that token
-MIN_INSTS = 1
+MIN_INSTS = 5
 NEG_SAMPLE_PORTION = 0.25
 #These are global variables that will be used later
 posInsts = {}
@@ -122,17 +122,17 @@ def getPosNegInstances():
 
 	resDictFile = []
 	with open(neg, 'rU') as csvfile:
-  	  readFile = csv.DictReader(csvfile)
-  	  for row in readFile:
-  	  	  resDictFile.append(row)
-  	  	  color = row['token']
-  	  	  objs = row['objects']
-  	  	  insts = objs.split("-")
-  	  	  newInsts = []
-  	  	  for instance in insts:
-  	  	  	  if instance in objInstances.keys():
-  	  	  	  	  newInsts.append(instance)
-  	  	  	  	  negInsts[color] = newInsts
+	  readFile = csv.DictReader(csvfile)
+	  for row in readFile:
+		  resDictFile.append(row)
+		  color = row['token']
+		  objs = row['objects']
+		  insts = objs.split("-")
+		  newInsts = []
+		  for instance in insts:
+			  if instance in objInstances.keys():
+				  newInsts.append(instance)
+				  negInsts[color] = newInsts
 
 
 def getTestInstancesAndClassifiers(fName):
@@ -219,20 +219,20 @@ def writePosNeg():
 		     inst_token_count_dict[key][k1] = v1
 		     #If the token was used more than 10 times, it is important
 		     if v1 > 10:
-		        mostImpTokens[key].append(k1)
+			mostImpTokens[key].append(k1)
 		     if v1 >= MIN_INSTS:
-	                #This is a spot where we only are looking at the
-		        #words that have been identified as "meaningful"
-		        #if k1 in meaningfulWords:
-		        tknsGlobal.add(k1)
+			#This is a spot where we only are looking at the
+			#words that have been identified as "meaningful"
+			#if k1 in meaningfulWords:
+			tknsGlobal.add(k1)
 			#if the token was a "meaningful word" with a high count,
 			#then the instance key is a positive example of that token.
-		        if k1 in posTokens.keys():
-		             kk1 = posTokens[k1]
-		             kk1.append(key)
-		             posTokens[k1] = kk1
-		        else:
-		             posTokens[k1] = [key]
+			if k1 in posTokens.keys():
+			     kk1 = posTokens[k1]
+			     kk1.append(key)
+			     posTokens[k1] = kk1
+			else:
+			     posTokens[k1] = [key]
 	 inst_token_count_frame = pd.DataFrame(inst_token_count_dict).fillna(0)
 
 	 inst_token_count_frame.to_csv(fld + "/token_instance_counts.csv")
@@ -256,7 +256,7 @@ def writePosNeg():
 	    negSampleTokens[kTkn] = []
 	    for (key,value) in objTokens.items():
 	       if kTkn not in value:
-	          negSampleTokens[kTkn].append(key)
+		  negSampleTokens[kTkn].append(key)
 	 negTokens = {}
 	 #Now we get the doc2vec versions of the description strings for the instances
 	 #we just identified
@@ -284,6 +284,7 @@ def writePosNeg():
            #take the top N negative examples by the weighted votes from all positive instances
            sum_negs_sorted = sorted(sum_negative_dict.iteritems(),key = lambda x: x[1], reverse=True)
            num_to_choose = int(math.ceil(float(len(sum_negs_sorted))*NEG_SAMPLE_PORTION))
+           #num_to_choose = min(num_to_choose,2*len(posV))
            negTokens[kTkn] = [negInst for negInst, negVal in sum_negs_sorted[:num_to_choose]]
 	
          #write the negative tokens to the file
@@ -401,7 +402,7 @@ def getMatchNumbers(relevantInst,selInst,testInstances):
         tps = []
 	#the true positives are the ones chosen by the classifier and also chosen as relevant positive examples
         if len(relevantInst) > 0:
- 	   tps = list(set(relevantInst).intersection(set(selInst)))
+	   tps = list(set(relevantInst).intersection(set(selInst)))
 	tP = float(len(tps))
 	#The false positives are the ones chosen as selInst but not actually positive
 	fP = float(len(selInst) - tP)
@@ -524,8 +525,8 @@ for fNo in fFldrs:
     print "token,accuracy,precision,recall,f1,num_positive_instances,num_negative_instances"
     for c in testTokens:
 	  #print "number of testTokens: ",len(testTokens)
-  	  dictRes = {'Classifier' : " "}
-  	  writer.writerow(dictRes)
+	  dictRes = {'Classifier' : " "}
+	  writer.writerow(dictRes)
           testPosInsts = []
           testNegInsts = []
           accT = 0.0
@@ -534,14 +535,14 @@ for fNo in fFldrs:
           recT = 0.0
 	  #print "length of posInsts.keys: ",len(posInsts.keys())
 	  if c in posInsts.keys():
-           	if len(posInsts[c]) > 0:
-	        	#objInstances has the set of test instances (as written in the ground truth test file)
-	        	#We only want to test over the intersection of the test instances and the positive instances
-  	        	testPosInsts = list(set(posInsts[c]).intersection(set(objInstances.keys())))
+		if len(posInsts[c]) > 0:
+			#objInstances has the set of test instances (as written in the ground truth test file)
+			#We only want to test over the intersection of the test instances and the positive instances
+			testPosInsts = list(set(posInsts[c]).intersection(set(objInstances.keys())))
 	  #print "length of negInsts.keys: ",len(negInsts.keys())
           if c in negInsts.keys():
-           	if len(negInsts[c]) > 0:
-              		testNegInsts = list(set(negInsts[c]).intersection(set(objInstances.keys())))
+		if len(negInsts[c]) > 0:
+			testNegInsts = list(set(negInsts[c]).intersection(set(objInstances.keys())))
 	 
 	  #After subsetting by the test instances, see if we still have any to test
           if len(testPosInsts) > 0 or len(testNegInsts) > 0:
@@ -550,43 +551,43 @@ for fNo in fFldrs:
                   precTkn = []
                   recTkn = []
 		  #repeat this test 10 times and average the results
-  	  	  for tms in range(10):
+		  for tms in range(10):
 			  #choose a random number between 0,1,2 for the number of positive instances to look at
-  	  	  	  #TODO: why these exact values??
+			  #TODO: why these exact values??
 			  posNo = random.sample(range(3), k=1)
 			  #choose a random number between 4,5,6
                           totNo = random.sample([4,5,6], k=1)
 			  #The remaining difference is the number of test instances
-  	  	  	  negNo = totNo[0] - posNo[0] - 1
+			  negNo = totNo[0] - posNo[0] - 1
 
 			  #send the list of positive and negative instances, as well as those two random numbers
 			  #get a list of specific instances to iterate over, and subset testImages by the exact instances
-  	  	  	  (relevantInst,testInstances) = getTestImages(testPosInsts,testNegInsts,posNo[0] + 1, negNo)
+			  (relevantInst,testInstances) = getTestImages(testPosInsts,testNegInsts,posNo[0] + 1, negNo)
 
-  	  	  	  #get the list of test images that are selected by the token classifiers to be positive instances
+			  #get the list of test images that are selected by the token classifiers to be positive instances
 			  selInst = selectCorrectImage(c,testInstances)
 
 			  #get the TP,FP,TN,FN scores for this batch of test instances and token
 			  #calculate the stats from this
-  	  	  	  (tP,fN,fP,tN) = getMatchNumbers(relevantInst,selInst,testInstances)
-  	  	  	  (acc,prec,rec,f1s) = getStats(tP,fN,fP,tN)
+			  (tP,fN,fP,tN) = getMatchNumbers(relevantInst,selInst,testInstances)
+			  (acc,prec,rec,f1s) = getStats(tP,fN,fP,tN)
 
 			  #Write the results in the csv file
-  	  	  	  tmpObj = ""
-  	  	  	  for v in testInstances.values():
-  	  	  	  	  tmpObj += str(v) + "      "
-  	  	  	  relInsts = ""
-  	  	  	  for ik in relevantInst:
-  	  	  	  	  relInsts += str(testInstances[ik]) + " "
-  	  	  	  selInsts = ""
+			  tmpObj = ""
+			  for v in testInstances.values():
+				  tmpObj += str(v) + "      "
+			  relInsts = ""
+			  for ik in relevantInst:
+				  relInsts += str(testInstances[ik]) + " "
+			  selInsts = ""
 
-  	  	  	  for ik in selInst:
-  	  	  	  	  selInsts += str(testInstances[ik]) + " "
-  	  	  	  dictRes = {'Classifier' : str(c),'Test Object Images' : tmpObj, 'Ground Truth' : str(relInsts)}
-  	  	  	  dictRes.update({'Selected by Classifier' : str(selInsts), 'Accuracy' : str(acc),'Precision' : str(prec) ,'Recall' : str(rec),'F1-Score' : str(f1s)})
+			  for ik in selInst:
+				  selInsts += str(testInstances[ik]) + " "
+			  dictRes = {'Classifier' : str(c),'Test Object Images' : tmpObj, 'Ground Truth' : str(relInsts)}
+			  dictRes.update({'Selected by Classifier' : str(selInsts), 'Accuracy' : str(acc),'Precision' : str(prec) ,'Recall' : str(rec),'F1-Score' : str(f1s)})
 			  dictRes.update({'True Positive' : str(tP),'True Negative' : str(tN) ,'False Positive' : str(fP),'False Negative' : str(fN)})
 
-	 		  writer.writerow(dictRes)
+			  writer.writerow(dictRes)
                           accTkn.append(acc)
                           f1sTkn.append(f1s)
                           precTkn.append(prec)

@@ -30,7 +30,9 @@ from scipy import spatial
 #NOTE: this is different from how many times it appeared for a particular instance. For the training that appears to
 #be 1.
 MIN_POS_INSTS = 3
-#NEG_SAMPLE_PORTION = 0.25
+#This controls the minimum number of times a token has to appear in descriptions for an instance before the instance 
+#is deemed to be a positive example of this token
+MIN_TOKEN_PER_INST = 5
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--resDir',help='path to result directory',required=True)
@@ -171,8 +173,14 @@ class NegSampleSelection:
          cInstance = docNames[i]
          for j,item2 in enumerate(docLabels):
             tDoc = model.docvecs[docLabels[j]]
-            cosineVal = self.cosine_similarity(fDoc,tDoc)
-            cValue = math.degrees(math.acos(cosineVal))
+            cosineVal = min(self.cosine_similarity(fDoc,tDoc),1.0)
+            try:
+            	cValue = math.degrees(math.acos(cosineVal))
+            except:
+                print cosineVal
+                print fDoc
+                print tDoc
+                exit()
             tInstance = docNames[j]
             cInstMap[tInstance] = cValue
          degreeMap[cInstance] = cInstMap
@@ -405,8 +413,9 @@ class Token:
       pS = Counter(self.posInstances)
       #NOTE: this is not how many times a token was used at all, but how many positive instances it has
       #This means a token count be used 100 times for a particular instance but still not make the cut.
-      if len(self.posInstances) < MIN_POS_INSTS:
+      if len(np.unique(self.posInstances)) < MIN_POS_INSTS:
 	  return np.array([]),np.array([])
+      #print self.name,":",self.posInstances
       features = np.array([])
       negFeatures = np.array([])
       y = np.array([])
@@ -524,18 +533,30 @@ class DataSet:
            docs[ds] = sent
         else:
            docs[ds] = column[1]
-        dsTokens = column[1].split(" ")
-        dsTokens = list(filter(None, dsTokens)) 
-        """ add 'yellow' and 'arch' as the tokens of 'arch/arch_1' """
-        instances[ds][0].addTokens(dsTokens)
+                
+
+      for inst in docs.keys():
+          #get the counts for tokens and filter those < MIN_TOKEN_PER_INST
+          token_counts = pd.Series(docs[inst].split(" ")).value_counts()
+          token_counts = token_counts[token_counts >= MIN_TOKEN_PER_INST]
+          dsTokens = token_counts.index.tolist()
+
+          instances[inst][0].addTokens(dsTokens)
+          for annotation in dsTokens:
+             if annotation not in tokenDf.keys():
+                 # creating Token class instances for all tokens (ex, 'yellow' and 'arch') 
+                 tokenDf[annotation] = Token(annotation)
+             # add 'arch/arch_1' as a positive instance for token 'yellow'   
+             tokenDf[annotation].extendPositives(inst)
+      """
         if ds not in tests:
          iName = instances[ds][0].getName()
          for annotation in dsTokens:
              if annotation not in tokenDf.keys():
-                 """ creating Token class instances for all tokens (ex, 'yellow' and 'arch') """
+                 # creating Token class instances for all tokens (ex, 'yellow' and 'arch') 
                  tokenDf[annotation] = Token(annotation)
-             """ add 'arch/arch_1' as a positive instance for token 'yellow' """    
-             tokenDf[annotation].extendPositives(ds) 
+             # add 'arch/arch_1' as a positive instance for token 'yellow'   
+             tokenDf[annotation].extendPositives(ds) """
       tks = pd.DataFrame(tokenDf,index=[0])
       sent = "Tokens :: "+ " ".join(tokenDf.keys())
       fileAppend(fName,sent)
@@ -543,7 +564,7 @@ class DataSet:
       negExamples = negSelection.generateNegatives()
 
       """ find negative instances for all tokens.
-      Instances which has cosine angle greater than 80 in vector space consider as negative sample"""
+      """
       for tk in tokenDf.keys():
          poss = list(set(tokenDf[tk].getPositives()))
          negs = []
@@ -575,6 +596,8 @@ class DataSet:
 
          #out of the options left choose the N most negative
          num_to_choose = int(math.ceil(float(len(negCandidateScores.keys()))*NEG_SAMPLE_PORTION))
+         #TESTING: no more than twice as many negative examples as positive
+         #num_to_choose = min(len(poss)*2,num_to_choose)
          choices_sorted = list(sorted(negCandidateScores.iteritems(), key= lambda x: x[1], reverse = True))
          choices = [negInst for negInst,negVal in choices_sorted[:num_to_choose]]
 
