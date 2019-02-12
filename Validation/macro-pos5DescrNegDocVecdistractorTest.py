@@ -6,11 +6,12 @@
 #
 
 # Arguments: If your result directory is 'test/NoOfDataPoints/6000', then
-# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'rgb' 'rgb'
+# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'rgb' 'rgb' <prefile>
 # or
-# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'shape' 'shape'
+# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'shape' 'shape' <prefile>
 # or
-# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'object' 'object'
+# python macro-pos5DescrNegDocVecdistractorTest.py test/NoOfDataPoints/ 'object' 'object' <prefile>
+# <prefile> is the path to the original preprocessed description file
 #!/usr/bin/env python
 import numpy as np
 from pandas import DataFrame, read_table
@@ -58,11 +59,7 @@ preFile = "../6k_lemmatized_72instances_mechanicalturk_description.conf"
 if len(argvs) > 4:
    preFile = str(argvs[4])
 
-language = "english"
-if len(argvs) > 5:
-   language = str(argvs[5])
-
-if len(argvs) > 6 and "train" in argvs:
+if len(argvs) > 5 and "train" in argvs:
    confFile = "groundTruthPredictionTrain.csv"
 else:
    confFile = "groundTruthPrediction.csv"
@@ -76,6 +73,7 @@ neg = fld + "/evalHelpFiles/" + tID + "negInstances.conf"
 ####TFIDF MeaningfulWords - Above 50.0####
 
 #These are the hardcoded vocabulary words
+"""
 if language == "spanish":
    rgbWords = ['amarillo','azul','morado','negro', 'isyellow','verde','marron','naranja','blanco','rojo' ]
    meaningfulWords = rgbWords
@@ -85,19 +83,9 @@ else:
 shapeWords  = ['cylinder','cube', 'triangle','triangular','rectangular']
 objWords = ['cylinder', 'apple','carrot', 'lime','lemon','orange', 'banana','cube', 'triangle', 'corn','cucumber', 'half', 'cabbage', 'ear', 'tomato', 'potato', 'cob','eggplant']
 objWords = list(set(objWords) - set(['ear','half']))
-
-#This is the list of tokens to be tested
-tobeTestedTokens = rgbWords
-if tID == "":
- tobeTestedTokens.extend(shapeWords)
- tobeTestedTokens.extend(objWords)
-elif tID == "shape":
-   tobeTestedTokens = shapeWords
-elif tID == "object":
-   tobeTestedTokens = objWords
+"""
 
 #No tokens have appeared yet
-neverAppeared = tobeTestedTokens
 predfName = fld + "/"+confFile
 predfileName = fld
 
@@ -298,8 +286,7 @@ def writePosNeg():
 	    f.write(ll)
 	 f.close()
 
-	 #This section looks at the "important" words as defined by the type of cassifiers we are testing
-	 #It grabs the positive and negative tokens of just those words
+	 #It grabs the positive and negative tokens of just those words with positive instances
 	 kWord = ["rgb","shape","object"]
 	 for wd in kWord:
 	   f = open(fld + "/evalHelpFiles/" + wd + posName, "w")
@@ -307,14 +294,7 @@ def writePosNeg():
 	   sWords = []
 	   f.write(title)
 	   f1.write(title)
-	   if wd == "rgb":
-	      sWords = rgbWords
-	   elif wd == "shape":
-	      sWords = shapeWords
-	   elif wd == "object":
-	      sWords = objWords
 	   for k,v in posTokens.items():
-	     #if k in sWords://NOTE!!!!!
 	     if len(v) > 0:
 	       ll  = str(k) + ","
 	       ll += "-".join(v)
@@ -509,10 +489,6 @@ for fNo in fFldrs:
     precFldr = []
     recFldr= []
 
-    #These are the tokens that were in an "important word" list but did no appear in the examples enough to have positive/negative instances
-    noTokens = list(set(tobeTestedTokens) - set(testTokens))
-    #This list looks the same as noTokens
-    neverAppeared =list(set(noTokens).intersection(set(neverAppeared)))
 
     #for the tokens that never appeared, give them a 0 score for everything
     """for cc in range(len(noTokens)):

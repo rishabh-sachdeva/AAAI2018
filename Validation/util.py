@@ -22,7 +22,8 @@ from random import shuffle
 fullAnnot = "fullAnnotation.conf"
 objURLS = "objectURLS.conf"
 N = 10
-tokenize = lambda doc: doc.lower().split(" ")
+
+#tokenize = lambda doc: doc.split(" ")
 
 def objectURLs() :
   objLinks = {}
@@ -53,8 +54,6 @@ def getDocuments(fName):
      l = line.split(",")
      l2 = line.replace(l[0]+ ",",'')
      l3 = l2.replace('\n','')
-     l3 = re.sub('[^A-Za-z0-9\ ]+', '', l3)
-     l3 = l3.lower()
      if(line != "" and l3 != "") :
       if l[0] in instSentences.keys():
          sent = instSentences[l[0]]
@@ -84,9 +83,7 @@ def getDocsForTest(arTokens,fName):
     l = line.split(",")
     if l[0] in arTokens:
      l2 = line.replace(l[0]+ ",",'')
-     l3 = l2.replace('\n','')
-#     l3 = re.sub('[^A-Za-z0-9\ ]+', '', l3)
-#     l3 = l3.lower()
+     l3 = l2.replace('\n','').replace("\r","")
      if(line != "" and l3 != "") :
       if l[0] in instSentences.keys():
          sent = instSentences[l[0]]
@@ -211,7 +208,7 @@ def doc2Vec(docs):
    for j,item2 in enumerate(docLabels):
      tDoc = model.docvecs[docLabels[j]]
      #get the similarity between instances
-     cosineVal = cosine_similarity(fDoc,tDoc)
+     cosineVal = max(-1.0,min(1.0,cosine_similarity(fDoc,tDoc)))
      tInstance = docLabels[j]
      cValue = math.degrees(math.acos(cosineVal))
      cInstMap[tInstance] = cValue

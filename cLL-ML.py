@@ -38,14 +38,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--resDir',help='path to result directory',required=True)
 parser.add_argument('--cat', help='type for learning', choices=['all','rgb','shape','object'],required=True)
 parser.add_argument('--pre', help='the file with the preprocessed data', required=True)
-parser.add_argument('--lan', choices=['english','spanish'],help='the language you are using', required=True)
 parser.add_argument('--cutoff',choices=['0.25','0.5','0.75'],help='the cutoff for what portion of negative examples to use', default='0.25')
 
 args = parser.parse_args()
 
 resultDir = args.resDir
 preFile = args.pre
-language = args.lan
 kinds = np.array([args.cat])
 NEG_SAMPLE_PORTION = float(args.cutoff)
 if args.cat == 'all':
@@ -55,7 +53,7 @@ execType = 'random'
 execPath = './'
 dPath = "../"
 dsPath = dPath + "ImgDz/"
-fAnnotation = execPath + "groundtruth_annotation.conf"
+fAnnotation = execPath + "list_of_instances.conf"
 
 dgAbove = 80
 
@@ -64,16 +62,11 @@ cDf = ""
 nDf = "" 
 tests = ""
 
-if language == "spanish":
-	fAnnotation = execPath + "groundtruth_annotation_spanish.conf"
-	generalColors = ['amarillo','azul','morado','negro', 'isyellow','verde','marron','naranja','blanco','rojo' ]
-else:
-	generalColors = ['yellow','blue','purple','black','isyellow','green','brown','orange','white','red']
 
-generalObjs = ['potatoe','cylinder','square', 'cuboid', 'sphere', 'halfcircle','circle','rectangle','cube','triangle','arch','semicircle','halfcylinder','wedge','block','apple','carrot','tomato','lemon','cherry','lime', 'banana','corn','hemisphere','cucumber','cabbage','ear','potato', 'plantain','eggplant']
+"""generalObjs = ['potatoe','cylinder','square', 'cuboid', 'sphere', 'halfcircle','circle','rectangle','cube','triangle','arch','semicircle','halfcylinder','wedge','block','apple','carrot','tomato','lemon','cherry','lime', 'banana','corn','hemisphere','cucumber','cabbage','ear','potato', 'plantain','eggplant']
 
 generalShapes = ['spherical', 'cylinder', 'square', 'rounded', 'cylindershaped', 'cuboid', 'rectangleshape','arcshape', 'sphere', 'archshaped', 'cubeshaped', 'curved' ,'rectangular', 'triangleshaped', 'halfcircle', 'globular','halfcylindrical', 'circle', 'rectangle', 'circular', 'cube', 'triangle', 'cubic', 'triangular', 'cylindrical','arch','semicircle', 'squareshape', 'arched','curve', 'halfcylinder', 'wedge', 'cylindershape', 'round', 'block', 'cuboidshaped']
-
+"""
 
 def fileAppend(fName, sentence):
   """""""""""""""""""""""""""""""""""""""""
@@ -173,10 +166,12 @@ class NegSampleSelection:
          cInstance = docNames[i]
          for j,item2 in enumerate(docLabels):
             tDoc = model.docvecs[docLabels[j]]
-            cosineVal = min(self.cosine_similarity(fDoc,tDoc),1.0)
+            cosineVal = max(-1.0,min(self.cosine_similarity(fDoc,tDoc),1.0))
+                        
             try:
             	cValue = math.degrees(math.acos(cosineVal))
             except:
+                print("ERROR: invalid cosine value")
                 print cosineVal
                 print fDoc
                 print tDoc
@@ -321,8 +316,11 @@ class Instance(Category):
         Function to find if a token is a meaningful representation for this instance for testing. In other words, if the token is described for this instance in learning phase, we consider it as a meaningful label.
          Args: Instance class instance, word (token) to verify, type of testing
          Returns: 1 (the token is a meaningful label) / 0 (the token is not a  meaningful label)
+
+		NOTE: the result of this function is not actually used anywhere. The gold labels for testing
+		are determined during test time. Thus this function is defunct.
 		"""""""""""""""""""""""""""""""""""""""""		
-		if token in list(self.tokens):
+		"""if token in list(self.tokens):
 			if kind == "rgb":
 				if token in list(generalColors):
 					return 1
@@ -332,6 +330,7 @@ class Instance(Category):
 			else:
 				if token in list(generalObjs):
 					return 1
+		"""
 		return 0
 
 class Token:
@@ -775,8 +774,6 @@ def callML(resultDir,insts,tkns,tests,algType,resfname):
 
   confFile.close()
   trainConfFile.close()
-  ####TODO: so the problem is that getTrain only grabs relevent training examples. I need all training examples. Thus I need to write a 
-  #new function that acts like the testing one in that it just gets all the features of the kind and excludes testing instances 
   
 def execution(resultDir,ds,cDf,nDf,tests):
 	
@@ -796,7 +793,6 @@ def execution(resultDir,ds,cDf,nDf,tests):
 
 if __name__== "__main__":
   print "START :: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-  anFile =  execPath + "groundtruth_annotation.conf"
   anFile =  execPath + preFile
   fResName = ""
   os.system("mkdir -p " + resultDir)
