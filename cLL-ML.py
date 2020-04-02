@@ -38,7 +38,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--resDir',help='path to result directory',required=True)
 parser.add_argument('--cat', help='type for learning', choices=['all','rgb','shape','object'],required=True)
 parser.add_argument('--pre', help='the file with the preprocessed data', required=True)
-parser.add_argument('--cutoff',choices=['0.25','0.5','0.75'],help='the cutoff for what portion of negative examples to use', default='0.25')
+parser.add_argument('--cutoff',choices=['0.1','0.15','0.25','0.5','0.75'],help='the cutoff for what portion of negative examples to use', default='0.25')
 
 args = parser.parse_args()
 
@@ -52,7 +52,8 @@ execType = 'random'
 
 execPath = './'
 dPath = "../"
-dsPath = dPath + "ImgDz/"
+#dsPath = dPath + "ImgDz/"
+dsPath = dPath + "GLD-features/visual_features/"
 fAnnotation = execPath + "list_of_instances.conf"
 
 dgAbove = 80
@@ -141,6 +142,7 @@ class NegSampleSelection:
 
    def generateNegatives(self):
       docs = self.docs
+      #print '*********************Generate Negs****',docs
       docNames = docs.keys()
       docLists = self.sentenceToWordLists()
       docDicts = self.sentenceToWordDicts()
@@ -273,7 +275,10 @@ class Instance(Category):
 		ar1 = instName.split("/")
 		path1 = "/".join([dsPath,instName])
 		path  = path1 + "/" + ar1[1] + "_" + kind + ".log"
+		#print '******************PATH to featurs ',path
 		featureSet = read_table(path,sep=',',  header=None)
+		#print len(featureSet.values)
+		#print 'FEATURES SET*********************',featureSet.values
 		return featureSet.values
 
 	def addNegatives(self, negs):
@@ -412,7 +417,11 @@ class Token:
       pS = Counter(self.posInstances)
       #NOTE: this is not how many times a token was used at all, but how many positive instances it has
       #This means a token count be used 100 times for a particular instance but still not make the cut.
-      if len(np.unique(self.posInstances)) < MIN_POS_INSTS:
+      #print '**************************TOK NAME **',self.name
+      #print '**************************POS Instances**',Counter(self.posInstances)
+      #print '**************************NEG Instances**',Counter(self.negInstances)
+      
+      if len(np.unique(self.posInstances)) <= MIN_POS_INSTS:
 	  return np.array([]),np.array([])
       #print self.name,":",self.posInstances
       features = np.array([])
@@ -440,6 +449,8 @@ class Token:
           features = np.tile(features,(c,1))
       """ find trainY for our binary classifier: 1 for positive samples,
       0 for negative samples"""
+      print '**************************LENS POS*****',len(features)
+      print '**************************LENS NEGS*****',len(negFeatures)
       y = np.concatenate((np.full(len(features),1),np.full(len(negFeatures),0)))
       if self.negInstances.shape[0] > 0:
         features = np.vstack([features,negFeatures])
@@ -473,12 +484,18 @@ class DataSet:
       """""""""""""""""""""""""""""""""""""""""
       nDf = read_table(self.annotationFile,sep=',',  header=None)
       nDs = nDf.values
+      #print nDs
       categories = {}
       instances = {}
       for (k1,v1) in nDs:
           instName = k1.strip()
+          #print k1
+          #print v1
+          #print "instname",instName
           (cat,inst) = instName.split("/")
-          (_,num) = inst.split("_")
+          #(_,num) = inst.split("_")
+          (_,num) = inst.rsplit("_",1)
+          #print num
           if cat not in categories.keys():
              categories[cat] = Category(cat)
           categories[cat].addCategoryInstances(num)
@@ -502,8 +519,10 @@ class DataSet:
       tests = np.array([])
       for cat in np.sort(cats.keys()):
          obj = cats[cat]
+         #print tests
          tests = np.append(tests,obj[0].chooseOneInstance())
       tests = np.sort(tests)
+      #print '****************************TESTS instances:',tests
       return tests
 
    def getDataSet(self,cDf,nDf,tests,fName):
@@ -533,20 +552,31 @@ class DataSet:
         else:
            docs[ds] = column[1]
 
-
+      #print '*****************DOCS',docs
       for inst in docs.keys():
           #get the counts for tokens and filter those < MIN_TOKEN_PER_INST
           token_counts = pd.Series(docs[inst].split(" ")).value_counts()
+          #print '***************************BEFORE FILTER Token counts',token_counts
+
           token_counts = token_counts[token_counts >= MIN_TOKEN_PER_INST]
           dsTokens = token_counts.index.tolist()
-
+          #print '***************************Token counts',token_counts
+            
           instances[inst][0].addTokens(dsTokens)
-          for annotation in dsTokens:
-             if annotation not in tokenDf.keys():
+          #print 'tests***************************',tests
+          #print "Curr INST",inst
+            ## change to consider only descriptions from training set
+          if inst not in tests:
+            #print "DS",ds
+            iName = instances[ds][0].getName()
+            for annotation in dsTokens:
+                if annotation not in tokenDf.keys():
                  # creating Token class instances for all tokens (ex, 'yellow' and 'arch')
-                 tokenDf[annotation] = Token(annotation)
-             # add 'arch/arch_1' as a positive instance for token 'yellow'
-             tokenDf[annotation].extendPositives(inst)
+                    tokenDf[annotation] = Token(annotation)
+                # add 'arch/arch_1' as a positive instance for token 'yellow'
+                #print "Extending positives  --anno",annotation
+                #print "Extending positives  --inst",inst
+                tokenDf[annotation].extendPositives(inst)
       """
         if ds not in tests:
          iName = instances[ds][0].getName()
@@ -561,6 +591,7 @@ class DataSet:
       fileAppend(fName,sent)
       negSelection = NegSampleSelection(docs)
       negExamples = negSelection.generateNegatives()
+      #print 'Returned Negs ', negExamples
 
       """ find negative instances for all tokens.
       """
@@ -607,7 +638,7 @@ class DataSet:
          #print "New negatives:", choices
          negsPart = choices
          tokenDf[tk].extendNegatives(negsPart)
-      exit()
+      #exit()
 
       return tks
 
@@ -661,7 +692,8 @@ def findTrainTestFeatures(insts,tkns,tests):
   """""""""""""""""""""""""""""""""""""""""
   tokenDict = tkns.to_dict()
   for token in np.sort(tokenDict.keys()):
-#  for token in ['arch']:
+  ##CHANGE
+  #for token in ['marker','syring','pencil']: ##
      objTkn = tokenDict[token][0]
      for kind in kinds:
 #     for kind in ['rgb']:
@@ -676,6 +708,8 @@ def findTrainTestFeatures(insts,tkns,tests):
 def callML(resultDir,insts,tkns,tests,algType,resfname):
   """ generate a CSV result file with all probabilities
 	for the association between tokens (words) and test instances"""
+  print resultDir
+  print 'create csv'
   confFile = open(resultDir + '/groundTruthPrediction.csv','w')
   headFlag = 0
   fldNames = np.array(['Token','Type'])
@@ -696,8 +730,11 @@ def callML(resultDir,insts,tkns,tests,algType,resfname):
 
   """ fine tokens, type to test, train/test features and values """
   for (token,kind,X,Y,tX,tY,trX, trNames) in findTrainTestFeatures(insts,tkns,tests):
+   #continue
    if token not in testTokens:
       testTokens.append(token)
+   #print testTokens
+   #print len(testTokens)
    print "Token : " + token + ", Kind : " + kind
    """ binary classifier Logisitc regression is used here """
    polynomial_features = PolynomialFeatures(degree=2,include_bias=False)
@@ -805,6 +842,7 @@ if __name__== "__main__":
   """ find all categories and instances in the dataset """
   (cDf,nDf) = ds.findCategoryInstances()
   """ find all test instances. We are doing 4- fold cross validation """
+  #print cDf
   tests = ds.splitTestInstances(cDf)
   print "ML START :: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
   execution(resultDir,ds,cDf,nDf,tests)

@@ -1,0 +1,217 @@
+Classifier,Test Object Images,Ground Truth,Selected by Classifier,True Positive,True Negative,False Positive,False Negative,Accuracy,Precision,Recall,F1-Score
+ ,,,,,,,,,,,
+cube,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+cube,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+cube,banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+cube,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,0.0,0.0,1.0,0.666666666667,1.0,0.666666666667,0.8
+cube,banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+cube,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,3.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+cube,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,1.0,0.75,1.0,0.666666666667,0.8
+cube,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+cube,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,0.0,0.0,1.0,0.666666666667,1.0,0.666666666667,0.8
+cube,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,3.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+Total - cube,,,,,,,,0.9083333333333332,1.0,0.9,0.9400000000000001
+ ,,,,,,,,,,,
+ripe,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,1.0,0.0,1.0,0.75,1.0,0.666666666667,0.8
+ripe,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,0.0,0.0,1.0,0.666666666667,1.0,0.666666666667,0.8
+ripe,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,3.0,0.0,0.0,1.0,1.0,1.0,1.0
+ripe,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+ripe,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,0.0,0.0,1.0,0.666666666667,1.0,0.666666666667,0.8
+ripe,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,0.0,0.0,1.0,0.666666666667,1.0,0.666666666667,0.8
+ripe,banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,0.0,0.0,1.0,0.5,1.0,0.5,0.666666666667
+ripe,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,3.0,0.0,1.0,0.8,1.0,0.5,0.666666666667
+ripe,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,2.0,0.0,1.0,0.75,1.0,0.5,0.666666666667
+ripe,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,1.0,0.0,1.0,0.666666666667,1.0,0.5,0.666666666667
+Total - ripe,,,,,,,,0.7466666666666667,1.0,0.6666666666666666,0.7866666666666667
+ ,,,,,,,,,,,
+shaped,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+shaped,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,3.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+shaped,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+shaped,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,3.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+shaped,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+shaped,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+shaped,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,3.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+shaped,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+shaped,cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+shaped,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,0.0,0.0,1.0,0.666666666667,1.0,0.666666666667,0.8
+Total - shaped,,,,,,,,0.9666666666666666,1.0,0.9666666666666666,0.9800000000000001
+ ,,,,,,,,,,,
+corn,banana/banana_2 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,1.0,0.0,2.0,0.0,0.333333333333,0.333333333333,1.0,0.5
+corn,banana/banana_2 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) ,banana/banana_2 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,1.0,0.0,2.0,0.0,0.333333333333,0.333333333333,1.0,0.5
+corn,corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,1.0,-1.0,2.0,1.0,0.0,0.333333333333,0.5,0.4
+corn,corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,2.0,0.0,1.0,0.0,0.666666666667,0.666666666667,1.0,0.8
+corn,corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,2.0,0.0,1.0,0.0,0.666666666667,0.666666666667,1.0,0.8
+corn,corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,-1.0,2.0,1.0,0.25,0.5,0.666666666667,0.571428571429
+corn,corn/corn_4 (nan)      corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,3.0,0.0,1.0,0.0,0.75,0.75,1.0,0.857142857143
+corn,corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,2.0,0.0,1.0,0.0,0.666666666667,0.666666666667,1.0,0.8
+corn,corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,2.0,0.0,1.0,0.0,0.666666666667,0.666666666667,1.0,0.8
+corn,banana/banana_2 (nan)      corn/corn_4 (nan)      ,corn/corn_4 (nan) ,banana/banana_2 (nan) corn/corn_4 (nan) ,1.0,0.0,1.0,0.0,0.5,0.5,1.0,0.666666666667
+Total - corn,,,,,,,,0.4833333333333333,0.5416666666666667,0.9166666666666666,0.6695238095238095
+ ,,,,,,,,,,,
+object,banana/banana_2 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,banana/banana_2 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,2.0,0.0,1.0,0.0,0.666666666667,0.666666666667,1.0,0.8
+object,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      banana/banana_2 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) banana/banana_2 (nan) ,3.0,0.0,1.0,0.0,0.75,0.75,1.0,0.857142857143
+object,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      banana/banana_2 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) banana/banana_2 (nan) ,3.0,0.0,1.0,0.0,0.75,0.75,1.0,0.857142857143
+object,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) banana/banana_2 (nan) ,2.0,1.0,1.0,0.0,0.75,0.666666666667,1.0,0.8
+object,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      banana/banana_2 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) banana/banana_2 (nan) ,2.0,0.0,1.0,0.0,0.666666666667,0.666666666667,1.0,0.8
+object,banana/banana_2 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) ,banana/banana_2 (nan) cucumber/cucumber_4 (nan) ,1.0,0.0,1.0,0.0,0.5,0.5,1.0,0.666666666667
+object,banana/banana_2 (nan)      cucumber/cucumber_4 (nan)      banana/banana_2 (nan)      ,cucumber/cucumber_4 (nan) ,banana/banana_2 (nan) cucumber/cucumber_4 (nan) ,1.0,1.0,1.0,0.0,0.666666666667,0.5,1.0,0.666666666667
+object,cucumber/cucumber_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) banana/banana_2 (nan) ,1.0,1.0,1.0,0.0,0.666666666667,0.5,1.0,0.666666666667
+object,cucumber/cucumber_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) banana/banana_2 (nan) ,1.0,1.0,1.0,0.0,0.666666666667,0.5,1.0,0.666666666667
+object,cucumber/cucumber_4 (nan)      banana/banana_2 (nan)      ,cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) banana/banana_2 (nan) ,1.0,0.0,1.0,0.0,0.5,0.5,1.0,0.666666666667
+Total - object,,,,,,,,0.6583333333333333,0.6,1.0,0.7447619047619047
+ ,,,,,,,,,,,
+laying,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,2.0,-1.0,0.0,1.0,0.5,1.0,0.666666666667,0.8
+laying,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,2.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+laying,cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+laying,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,2.0,-1.0,0.0,1.0,0.5,1.0,0.666666666667,0.8
+laying,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,2.0,-1.0,0.0,1.0,0.5,1.0,0.666666666667,0.8
+laying,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,3.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+laying,cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+laying,cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+laying,cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+laying,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,3.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+Total - laying,,,,,,,,0.85,1.0,0.9,0.9400000000000001
+ ,,,,,,,,,,,
+green,cube/cube_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,1.0,0.0,3.0,0.0,0.25,0.25,1.0,0.4
+green,cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cube/cube_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+green,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,3.0,0.0,2.0,0.0,0.6,0.6,1.0,0.75
+green,cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,2.0,-1.0,2.0,1.0,0.25,0.5,0.666666666667,0.571428571429
+green,cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,1.0,0.0,2.0,0.0,0.333333333333,0.333333333333,1.0,0.5
+green,cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,1.0,-1.0,2.0,1.0,0.0,0.333333333333,0.5,0.4
+green,cube/cube_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,1.0,0.0,4.0,0.0,0.2,0.2,1.0,0.333333333333
+green,cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+green,cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) ,cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,1.0,0.0,3.0,0.0,0.25,0.25,1.0,0.4
+green,cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cube/cube_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,3.0,0.0,2.0,0.0,0.6,0.6,1.0,0.75
+Total - green,,,,,,,,0.34833333333333333,0.4066666666666666,0.9166666666666666,0.5438095238095239
+ ,,,,,,,,,,,
+yellow,corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) cube/cube_4 (nan) ,3.0,1.0,1.0,0.0,0.8,0.75,1.0,0.857142857143
+yellow,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+yellow,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) cube/cube_4 (nan) ,1.0,2.0,1.0,0.0,0.75,0.5,1.0,0.666666666667
+yellow,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,3.0,0.0,0.0,1.0,1.0,1.0,1.0
+yellow,corn/corn_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) cube/cube_4 (nan) ,2.0,1.0,1.0,1.0,0.6,0.666666666667,0.666666666667,0.666666666667
+yellow,cube/cube_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) cube/cube_4 (nan) ,2.0,1.0,1.0,0.0,0.75,0.666666666667,1.0,0.8
+yellow,corn/corn_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) cube/cube_4 (nan) ,2.0,2.0,1.0,0.0,0.8,0.666666666667,1.0,0.8
+yellow,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) cube/cube_4 (nan) ,1.0,2.0,1.0,0.0,0.75,0.5,1.0,0.666666666667
+yellow,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) cube/cube_4 (nan) ,1.0,1.0,1.0,0.0,0.666666666667,0.5,1.0,0.666666666667
+yellow,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) cube/cube_4 (nan) ,1.0,3.0,1.0,0.0,0.8,0.5,1.0,0.666666666667
+Total - yellow,,,,,,,,0.7916666666666667,0.675,0.9666666666666666,0.7790476190476191
+ ,,,,,,,,,,,
+side,banana/banana_2 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+side,banana/banana_2 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+side,banana/banana_2 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+side,banana/banana_2 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+side,banana/banana_2 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+side,cucumber/cucumber_4 (nan)      banana/banana_2 (nan)      corn/corn_4 (nan)      ,banana/banana_2 (nan) cucumber/cucumber_4 (nan) corn/corn_4 (nan) ,cucumber/cucumber_4 (nan) banana/banana_2 (nan) corn/corn_4 (nan) ,3.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+side,banana/banana_2 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+side,banana/banana_2 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+side,banana/banana_2 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+side,banana/banana_2 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0
+Total - side,,,,,,,,1.0,1.0,1.0,1.0
+ ,,,,,,,,,,,
+shape,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+shape,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,3.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+shape,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,3.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+shape,cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+shape,banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+shape,banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,-1.0,0.0,2.0,0.0,1.0,0.333333333333,0.5
+shape,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+shape,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,1.0,0.0,1.0,0.666666666667,1.0,0.5,0.666666666667
+shape,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,1.0,0.75,1.0,0.666666666667,0.8
+shape,cube/cube_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,3.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+Total - shape,,,,,,,,0.8416666666666666,1.0,0.85,0.8966666666666665
+ ,,,,,,,,,,,
+cob,corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,1.0,-1.0,2.0,1.0,0.0,0.333333333333,0.5,0.4
+cob,corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,1.0,0.0,2.0,0.0,0.333333333333,0.333333333333,1.0,0.5
+cob,corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,1.0,0.0,2.0,0.0,0.333333333333,0.333333333333,1.0,0.5
+cob,corn/corn_4 (nan)      corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,3.0,0.0,1.0,0.0,0.75,0.75,1.0,0.857142857143
+cob,banana/banana_2 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      corn/corn_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) ,banana/banana_2 (nan) corn/corn_4 (nan) banana/banana_2 (nan) corn/corn_4 (nan) ,2.0,-1.0,2.0,1.0,0.25,0.5,0.666666666667,0.571428571429
+cob,banana/banana_2 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) ,banana/banana_2 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,1.0,0.0,2.0,0.0,0.333333333333,0.333333333333,1.0,0.5
+cob,corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) ,1.0,-1.0,1.0,1.0,0.0,0.5,0.5,0.5
+cob,banana/banana_2 (nan)      corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+cob,banana/banana_2 (nan)      corn/corn_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,banana/banana_2 (nan) corn/corn_4 (nan) ,1.0,-1.0,1.0,1.0,0.0,0.5,0.5,0.5
+cob,banana/banana_2 (nan)      corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) ,banana/banana_2 (nan) corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,2.0,-1.0,2.0,1.0,0.25,0.5,0.666666666667,0.571428571429
+Total - cob,,,,,,,,0.275,0.4583333333333333,0.7833333333333333,0.5566666666666666
+ ,,,,,,,,,,,
+square,cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+square,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+square,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+square,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,1.0,0.75,1.0,0.666666666667,0.8
+square,cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+square,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+square,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+square,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,1.0,0.0,1.0,0.666666666667,1.0,0.5,0.666666666667
+square,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+square,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+Total - square,,,,,,,,0.9416666666666667,1.0,0.9166666666666666,0.9466666666666667
+ ,,,,,,,,,,,
+lying,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+lying,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+lying,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,2.0,0.0,1.0,0.8,1.0,0.666666666667,0.8
+lying,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+lying,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,3.0,0.0,0.0,1.0,1.0,1.0,1.0
+lying,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,1.0,0.0,1.0,0.75,1.0,0.666666666667,0.8
+lying,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,2.0,0.0,1.0,0.75,1.0,0.5,0.666666666667
+lying,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+lying,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+lying,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+Total - lying,,,,,,,,0.93,1.0,0.8833333333333332,0.9266666666666665
+ ,,,,,,,,,,,
+cucumber,cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+cucumber,cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,3.0,0.0,2.0,0.0,0.6,0.6,1.0,0.75
+cucumber,cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+cucumber,cube/cube_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,1.0,-1.0,3.0,1.0,0.0,0.25,0.5,0.333333333333
+cucumber,cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,0.0,3.0,0.0,0.4,0.4,1.0,0.571428571429
+cucumber,cube/cube_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,1.0,-1.0,3.0,1.0,0.0,0.25,0.5,0.333333333333
+cucumber,cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+cucumber,cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) ,cucumber/cucumber_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,1.0,0.0,3.0,0.0,0.25,0.25,1.0,0.4
+cucumber,cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      ,cucumber/cucumber_4 (nan) ,cube/cube_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,1.0,0.0,2.0,0.0,0.333333333333,0.333333333333,1.0,0.5
+cucumber,cube/cube_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      cube/cube_4 (nan)      cucumber/cucumber_4 (nan)      ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cube/cube_4 (nan) ,2.0,0.0,3.0,0.0,0.4,0.4,1.0,0.571428571429
+Total - cucumber,,,,,,,,0.34833333333333333,0.3983333333333333,0.9,0.5459523809523809
+ ,,,,,,,,,,,
+white,corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,corn/corn_4 (nan) ,corn/corn_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,1.0,0.0,4.0,0.0,0.2,0.2,1.0,0.333333333333
+white,cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      corn/corn_4 (nan)      ,corn/corn_4 (nan) ,cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) corn/corn_4 (nan) cucumber/cucumber_4 (nan) ,1.0,0.0,3.0,0.0,0.25,0.25,1.0,0.4
+white,corn/corn_4 (nan)      corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+white,cucumber/cucumber_4 (nan)      corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,corn/corn_4 (nan) ,cucumber/cucumber_4 (nan) corn/corn_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,1.0,0.0,4.0,0.0,0.2,0.2,1.0,0.333333333333
+white,corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,2.0,0.0,3.0,0.0,0.4,0.4,1.0,0.571428571429
+white,corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,1.0,-1.0,2.0,1.0,0.0,0.333333333333,0.5,0.4
+white,corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,1.0,-2.0,2.0,2.0,-0.333333333333,0.333333333333,0.333333333333,0.333333333333
+white,corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) corn/corn_4 (nan) cucumber/cucumber_4 (nan) ,2.0,0.0,3.0,0.0,0.4,0.4,1.0,0.571428571429
+white,corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      cucumber/cucumber_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) cucumber/cucumber_4 (nan) corn/corn_4 (nan) cucumber/cucumber_4 (nan) cucumber/cucumber_4 (nan) ,2.0,0.0,3.0,0.0,0.4,0.4,1.0,0.571428571429
+white,cucumber/cucumber_4 (nan)      corn/corn_4 (nan)      cucumber/cucumber_4 (nan)      corn/corn_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,cucumber/cucumber_4 (nan) corn/corn_4 (nan) cucumber/cucumber_4 (nan) corn/corn_4 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+Total - white,,,,,,,,0.25166666666666665,0.3516666666666667,0.8833333333333332,0.48476190476190484
+ ,,,,,,,,,,,
+ear,corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,1.0,0.0,2.0,0.0,0.333333333333,0.333333333333,1.0,0.5
+ear,corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      corn/corn_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) corn/corn_4 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+ear,corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      corn/corn_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) corn/corn_4 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+ear,corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,1.0,0.0,2.0,0.0,0.333333333333,0.333333333333,1.0,0.5
+ear,corn/corn_4 (nan)      banana/banana_2 (nan)      corn/corn_4 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) corn/corn_4 (nan) ,2.0,0.0,1.0,0.0,0.666666666667,0.666666666667,1.0,0.8
+ear,banana/banana_2 (nan)      corn/corn_4 (nan)      corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,3.0,0.0,2.0,0.0,0.6,0.6,1.0,0.75
+ear,banana/banana_2 (nan)      corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,banana/banana_2 (nan) corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+ear,corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) ,corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,1.0,0.0,2.0,0.0,0.333333333333,0.333333333333,1.0,0.5
+ear,corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,0.0,2.0,0.0,0.5,0.5,1.0,0.666666666667
+ear,corn/corn_4 (nan)      corn/corn_4 (nan)      corn/corn_4 (nan)      banana/banana_2 (nan)      ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) ,corn/corn_4 (nan) corn/corn_4 (nan) corn/corn_4 (nan) banana/banana_2 (nan) ,3.0,0.0,1.0,0.0,0.75,0.75,1.0,0.857142857143
+Total - ear,,,,,,,,0.5016666666666666,0.5016666666666666,1.0,0.6573809523809523
+ ,,,,,,,,,,,
+banana,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+banana,cube/cube_4 (nan)      banana/banana_2 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,-1.0,0.0,2.0,0.0,1.0,0.333333333333,0.5
+banana,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,3.0,0.0,0.0,1.0,1.0,1.0,1.0
+banana,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,1.0,0.0,1.0,0.75,1.0,0.666666666667,0.8
+banana,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,3.0,0.0,0.0,1.0,1.0,1.0,1.0
+banana,cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,3.0,0.0,0.0,1.0,1.0,1.0,1.0
+banana,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+banana,banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) ,1.0,1.0,0.0,1.0,0.666666666667,1.0,0.5,0.666666666667
+banana,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,0.0,0.0,1.0,0.666666666667,1.0,0.666666666667,0.8
+banana,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,banana/banana_2 (nan) banana/banana_2 (nan) banana/banana_2 (nan) ,banana/banana_2 (nan) banana/banana_2 (nan) ,2.0,1.0,0.0,1.0,0.75,1.0,0.666666666667,0.8
+Total - banana,,,,,,,,0.7833333333333333,1.0,0.7833333333333334,0.8566666666666667
+ ,,,,,,,,,,,
+block,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,1.0,0.75,1.0,0.666666666667,0.8
+block,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+block,banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+block,cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+block,banana/banana_2 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+block,cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+block,cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,2.0,0.0,0.0,1.0,1.0,1.0,1.0
+block,banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) ,cube/cube_4 (nan) ,1.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+block,cube/cube_4 (nan)      banana/banana_2 (nan)      banana/banana_2 (nan)      cube/cube_4 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,1.0,0.75,1.0,0.666666666667,0.8
+block,cube/cube_4 (nan)      cube/cube_4 (nan)      banana/banana_2 (nan)      ,cube/cube_4 (nan) cube/cube_4 (nan) ,cube/cube_4 (nan) cube/cube_4 (nan) ,2.0,1.0,0.0,0.0,1.0,1.0,1.0,1.0
+Total - block,,,,,,,,0.95,1.0,0.9333333333333332,0.96

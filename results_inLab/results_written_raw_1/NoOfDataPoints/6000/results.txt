@@ -1,0 +1,4 @@
+Test Instances :: banana/banana_1 corn/corn_4 cube/cube_3 cucumber/cucumber_4
+Tokens ::  square is yellow an its blue banana red A picture cube This corn object cucumber The ear a on shaped this of cob green the side block
+
+//11 stop-written

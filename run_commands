@@ -1,0 +1,20 @@
+#!/bin/bash
+python2 cLL-ML.py --resDir sp_raw_50_0 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_raw_50_0.conf" --cat all
+python2 cLL-ML.py --resDir sp_raw_50_1 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_raw_50_0.conf" --cat all
+python2 cLL-ML.py --resDir sp_raw_50_2 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_raw_50_0.conf" --cat all
+python2 cLL-ML.py --resDir sp_raw_50_3 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_raw_50_1.conf" --cat all
+python2 cLL-ML.py --resDir sp_raw_50_4 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_raw_50_1.conf" --cat all
+python2 cLL-ML.py --resDir sp_raw_50_5 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_raw_50_1.conf" --cat all
+python2 cLL-ML.py --resDir sp_raw_50_6 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_raw_50_2.conf" --cat all
+python2 cLL-ML.py --resDir sp_raw_50_7 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_raw_50_2.conf" --cat all
+python2 cLL-ML.py --resDir sp_raw_50_8 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_raw_50_2.conf" --cat all
+
+python2 cLL-ML.py --resDir sp_stemmed_50_0 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_stemmed_50_0.conf" --cat all
+python2 cLL-ML.py --resDir sp_stemmed_50_1 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_stemmed_50_0.conf" --cat all
+python2 cLL-ML.py --resDir sp_stemmed_50_2 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_stemmed_50_0.conf" --cat all
+python2 cLL-ML.py --resDir sp_stemmed_50_3 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_stemmed_50_1.conf" --cat all
+python2 cLL-ML.py --resDir sp_stemmed_50_4 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_stemmed_50_1.conf" --cat all
+python2 cLL-ML.py --resDir sp_stemmed_50_5 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_stemmed_50_1.conf" --cat all
+python2 cLL-ML.py --resDir sp_stemmed_50_6 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_stemmed_50_2.conf" --cat all
+python2 cLL-ML.py --resDir sp_stemmed_50_7 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_stemmed_50_2.conf" --cat all
+python2 cLL-ML.py --resDir sp_stemmed_50_8 --pre "conf_files\spanish(batches1,2,3)\sp_3batches_lowinst_stemmed_50_2.conf" --cat all

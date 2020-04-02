@@ -1,0 +1,2 @@
+Test Instances :: banana/banana_4 corn/corn_4 cube/cube_4 cucumber/cucumber_3
+Tokens :: blue cucumb use cube like salad cob color corn yellow chees eat fruit green red plantain white banana block look

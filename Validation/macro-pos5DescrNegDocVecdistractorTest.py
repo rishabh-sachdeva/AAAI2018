@@ -1,7 +1,7 @@
 # This script tests and validates the performance of visual classifiers beyond category,
 # by selecting right positive instances from the pool of positive and negative instance object images.
 #
-# Positive instances --> images of instances of which the visual classifier token is used at least 6 times to describe.
+# Positive instances --> images of instances of which the visual classifier token is used at least 5 times to describe.
 # Negative instances -- > the intersection of negative sampling and Doc2Vec negative instances of all positive instances
 #
 
@@ -55,9 +55,11 @@ if len(argvs) > 3:
    cID = str(argvs[3])
 
 
-preFile = "../6k_lemmatized_72instances_mechanicalturk_description.conf"
+#preFile = "../6k_lemmatized_72instances_mechanicalturk_description.conf"
+preFile = ""#"../englishLematized.conf"
 if len(argvs) > 4:
    preFile = str(argvs[4])
+   print preFile
 
 if len(argvs) > 5 and "train" in argvs:
    confFile = "groundTruthPredictionTrain.csv"
@@ -538,11 +540,14 @@ for fNo in fFldrs:
                           totNo = random.sample([4,5,6], k=1)
 			  #The remaining difference is the number of test instances
 			  negNo = totNo[0] - posNo[0] - 1
-
+			  #print "tot no",totNo
+			  #print "pos no",posNo
+			  #print "neg no",negNo
 			  #send the list of positive and negative instances, as well as those two random numbers
 			  #get a list of specific instances to iterate over, and subset testImages by the exact instances
 			  (relevantInst,testInstances) = getTestImages(testPosInsts,testNegInsts,posNo[0] + 1, negNo)
-
+			  #print "relevantInst",relevantInst
+			  #print "testInstances",testInstances
 			  #get the list of test images that are selected by the token classifiers to be positive instances
 			  selInst = selectCorrectImage(c,testInstances)
 

@@ -1,0 +1,2 @@
+Test Instances :: banana/banana_2 corn/corn_3 cube/cube_1 cucumber/cucumber_2
+Tokens ::  square ripe color sweet yellow shape husk blue toy vegetable plantain white banana red picture cube corn object cucumber ear butter like shaped laying bright rectangular cob green lying piece side block

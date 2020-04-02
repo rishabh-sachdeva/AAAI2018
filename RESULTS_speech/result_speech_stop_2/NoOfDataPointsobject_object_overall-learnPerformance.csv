@@ -1,0 +1,2 @@
+Test Batch,True Positive,True Negative,False Positive,False Negative,Accuracy,Precision,Recall,F1-Score
+6000,,,,,0.6961581920903955,0.5673163841807908,0.4878531073446327,0.4962953995157385
